@@ -1,29 +1,45 @@
-const gamescreen = document.getElementById('gamescreen')
-const ctx = gamescreen.getContext('2d')
-const playerHeight = 80
-const playerWidth = 80
-let playerX = 0
-
-ctx.beginPath()
-ctx.rect(0, 420, 80, 80)
-ctx.fillStyle = "lime"
-ctx.fill()
-ctx.closePath()
+var x = 200;
+var y = 200;
 
 
-ctx.beginPath()
-ctx.rect(420, 420, 80, 80)
-ctx.fillStyle = "red"
-ctx.fill()
-ctx.closePath()
+function setup() {
+  createCanvas(400, 400);
+}
 
-document.addEventListener('keydown', e => {
-  if (e.which == 37) {
-    playerX -= 7
+function draw() {
+  background(250);
+  fill(0);
+  ellipse(x,y,50,50);
+
+  //x = x + 1;
+
+
+  if (x >= width){
+   x = width;
+ }
+   if (x <= 0){
+    x = 0;
   }
-  else if (e.which == 39) {
-    playerX += 7
+  if (y >= height) {
+    y = height;
+  }
+  if (y <= 0) {
+    y = 0;
   }
 
+}
 
-})
+
+function keyPressed() {
+  if (keyCode === UP_ARROW) {
+    y = y - 50;
+  } else if (keyCode === DOWN_ARROW) {
+   y = y + 50;
+  }
+  if (keyCode === LEFT_ARROW) {
+    x = x - 50;
+  } else if (keyCode === RIGHT_ARROW) {
+    x = x + 50;
+  }
+
+}
