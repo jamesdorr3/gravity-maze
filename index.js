@@ -1,3 +1,4 @@
+
 const fetchURL = 'http://localhost:3000/'
 class Player {
   constructor(id, name, score) {
@@ -19,6 +20,7 @@ let x = 200;
 let y = 200;
 let gravity = 0.3;
 
+
 let xSpeed = 0;
 let ySpeed = 0;
 let gravitySpeed = 0;
@@ -39,6 +41,7 @@ function setup() {
     x, y, 50, 100);
   player.addImage(rest, 0, 0)
 }
+
 
 function draw() {
   background(0, 255, 0);
@@ -176,7 +179,7 @@ function makeLeaderboard() {
 function login() {
   const body = document.querySelector('body');
   body.innerHTML += `
-  <div id="login"> 
+  <div id="login">
     <form>
       Name:<br>
       <input type="text" name="name" placeholder="Your Unique Name">
