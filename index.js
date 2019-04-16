@@ -49,10 +49,10 @@ function keyPressed() {
 }
 
 function makeLeaderboard() {
-  fetch('http://localhost:3000/games')
+  fetch('http://localhost:3000/leaderboard')
   .then(r => r.json())
-  .then(gamesArray => gamesArray.forEach (game => {
-    console.log('hi')
+  .then(players => players.forEach (player => {
+    document.querySelector('ul.leaderboard').innerHTML += `<li>${player.name} - ${player.score}`
   }))
 }
 

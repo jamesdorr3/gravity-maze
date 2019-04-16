@@ -1,9 +1,10 @@
-#gamescreen {
-     background-color: lightgray;
+#defaultCanvas0 {
+     float: left;
 }
 
-#leaderboard {
+.leaderboard {
      background-color: lime;
-     height: 400px;
-     width: 200px;
+     float: right;
+     padding: 5px;
+     list-style: none;
 }
