@@ -1,5 +1,16 @@
 
 const fetchURL = 'http://localhost:3000/'
+class Player {
+  constructor(id, name, score) {
+    this.id = id;
+    this.name = name;
+    this.score = score;
+    Player.all.push(this);
+  }
+}
+Player.all = [];
+let gravityDirection = 'down';
+
 document.addEventListener('DOMContentLoaded', e => {
   login();
   makeLeaderboard()
@@ -7,78 +18,152 @@ document.addEventListener('DOMContentLoaded', e => {
 
 let x = 200;
 let y = 200;
+let gravity = 0.3;
 
 
+let xSpeed = 0;
+let ySpeed = 0;
+let gravitySpeed = 0;
+
+function preload() {
+  rest = loadImage(fetchURL + 'Fruits_Papaya_2D_Game_Asset/actions/rest/0001.png');
+  doorImg = loadImage('http://localhost:3000/moondoor.png')
+}
 
 function setup() {
-  createCanvas(400, 400);
+  door = createSprite(
+    940, 605, 50, 85);
+  door.addImage(doorImg, 0, 0)
+  door.scale = .4
 
+  createCanvas(1000, 700);
+  player = createSprite(
+    x, y, 50, 100);
+  player.addImage(rest, 0, 0)
 }
 
 
 function draw() {
-
-  background(250);
+  background(0, 255, 0);
   fill(0);
-  ellipse(x,y,50,50);
-  rect(350,350,50,50);
+  // rect(x,y,50,100);
+  // fill(0);
+  // rect(360, 320, 40, 80);
+  // fill(250)
+  // const upTri = triangle (300, 390, 310, 340, 320, 390)
+  drawSprites();
 
+  player.position.x = x;
+  player.position.y = y;
 
   //x = x + 1;
 
-  if (x >= width){
-   x = width;
- }
-   if (x <= 0){
-    x = 0;
+  if (keyIsDown(LEFT_ARROW)) {
+    x -= 5;
   }
-  if (y >= height) {
-    y = height;
+  if(keyIsDown(RIGHT_ARROW)) {
+    x += 5;
   }
-  if (y <= 0) {
-    y = 0;
-  };
-  // ellipse(a,b,30,30);
-  //
-  // //x = x + 1;
-  //
-  // if (a >= width){
-  //  a = width;
-  // }
-  //  if (a <= 0){
-  //   a = 0;
-  // }
-  // if (b >= height) {
-  //   b = height;
-  // }
-  // if (b <= 0) {
-  //   b = 0;
-  // }
-}
+  if (keyIsDown(DOWN_ARROW)) {
+    y += 5;
+  }
+  if (keyIsDown(UP_ARROW)) {
+    y -= 5;
+  }
+  if (keyIsDown(SHIFT)) {
+    y -= 5;
+  }
 
-function keyPressed() {
-  if (keyCode === 87) {
-    y = y - 50;
-  } else if (keyCode === 83) {
-   y = y + 50;
-  }
-  if (keyCode === 65) {
-    x = x - 50;
-  } else if (keyCode === 68) {
-    x = x + 50;
-  }
-  // if (keyCode === UP_ARROW) {
-  //   b = b - 50;
-  // } else if (keyCode === DOWN_ARROW) {
-  //  b = b + 50;
-  // }
-  // if (keyCode === LEFT_ARROW) {
-  //   a = a - 50;
-  // } else if (keyCode === RIGHT_ARROW) {
-  //   a = a + 50;
+  // if (x > 335 && y > 295) {
+    
   // }
 
+  // if (x > 280 && x < 325 && y > 350) {
+  //   gravityDirection = 'up'
+  // }
+
+  // Gravity
+  switch (gravityDirection) {
+    case 'down':
+      if (x > width - 25){
+        x = width - 25;}
+      else if (x < 0 + 25){
+        x = 0 + 25;}
+      else if (y > height - 50) {
+        y = height - 50;
+        gravitySpeed = 0;}
+      else if (y < 0 + 50) {
+        y = 0 + 50;}
+      gravitySpeed += gravity;
+      x += xSpeed;
+      y += ySpeed + gravitySpeed;
+      break;
+    case 'up':
+      if (x > width - 25){
+        x = width - 25;}
+      else if (x < 0 + 25){
+        x = 0 + 25;}
+      else if (y > height - 50) {
+        y = height - 50;}
+      else if (y < 0 + 50) {
+        y = 0 + 50;
+        gravitySpeed = 0;}
+      gravitySpeed += gravity;
+      x += xSpeed;
+      y -= ySpeed + gravitySpeed;
+      break;
+    case 'left':
+      if (x > width - 25){
+        x = width - 25;
+        gravitySpeed = 0;}
+      else if (x < 0 + 25){
+        x = 0 + 25;
+        gravitySpeed = 0;}
+      else if (y > height - 50) {
+        y = height - 50;}
+      else if (y < 0 + 50) {
+        y = 0 + 50;}
+      gravitySpeed += gravity;
+      x -= xSpeed + gravitySpeed;
+      y += ySpeed;
+      break;
+    case 'right':
+      if (x > width - 25){
+        x = width - 25;
+        gravitySpeed = 0;}
+      else if (x < 0 + 25){
+        x = 0 + 25;
+        gravitySpeed = 0;}
+      else if (y > height - 50) {
+        y = height - 50;}
+      else if (y < 0 + 50) {
+        y = 0 + 50;}
+      gravitySpeed += gravity;
+      x += xSpeed + gravitySpeed;
+      y += ySpeed;
+      break;
+  }
+
+  // if (ell.overlap(upTri)) {
+  //   console.log('win')
+  // }
+
 }
+
+
+// function keyPressed() {
+//   if (keyCode === (UP_ARROW)) {
+//     y = y - 50;
+//   } else if (keyCode === DOWN_ARROW) {
+//    y = y + 50;
+//   }
+//   if (keyCode === LEFT_ARROW) {
+//     x = x - 50;
+//   } else if (keyCode === RIGHT_ARROW) {
+//     x = x + 50;
+//   }
+
+// }
 
 function makeLeaderboard() {
   fetch(fetchURL + 'highscores')
@@ -116,16 +201,6 @@ function submitListener() {
     document.querySelector('.leaderboard h2').innerText = name;
   })
 }
-
-class Player {
-  constructor(id, name, score) {
-    this.id = id;
-    this.name = name;
-    this.score = score;
-    Player.all.push(this);
-  }
-}
-Player.all = [];
 
 function findOrCreatePlayer(name) {
   if (Player.all.map(p => p.name).includes(name)) {
