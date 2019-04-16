@@ -3,5 +3,5 @@ Rails.application.routes.draw do
   resources :players
   resources :games
 
-  get '/leaderboard', to: 'players#leaderboard'
+  get '/highscores', to: 'players#highscores'
 end
