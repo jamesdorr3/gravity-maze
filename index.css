@@ -1,3 +1,28 @@
-#gamescreen {
-     background-color: lightgray;
+#defaultCanvas0 {
+     float: left;
+}
+
+.leaderboard {
+     background-color: lime;
+     float: right;
+     padding: 5px;
+     list-style: none;
+}
+
+#login {
+     z-index: 1;
+     background-color:rgba(255, 255, 255, 0.795);
+     position: absolute;
+     height: 90%;
+     width: 90%;
+     margin: 5%;
+}
+
+form, input {
+     text-align: center;
+     font-size: 50px;
+}
+
+form {
+     padding-top: 30%;
 }
