@@ -1,3 +1,7 @@
+document.addEventListener('DOMContentLoaded', e => {
+  makeLeaderboard()
+})
+
 var x = 200;
 var y = 200;
 
@@ -43,3 +47,12 @@ function keyPressed() {
   }
 
 }
+
+function makeLeaderboard() {
+  fetch('http://localhost:3000/games')
+  .then(r => r.json())
+  .then(gamesArray => gamesArray.forEach (game => {
+    console.log('hi')
+  }))
+}
+
