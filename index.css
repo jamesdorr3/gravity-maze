@@ -9,14 +9,14 @@
      list-style: none;
 }
 
-#login {
+/* #login {
      z-index: 1;
-     background-color:rgba(255, 255, 255, 0.795);
+     background-color:rgba(255, 255, 255, 0.726);
      position: absolute;
      height: 90%;
      width: 90%;
      margin: 5%;
-}
+} 
 
 form, input {
      text-align: center;
@@ -25,4 +25,4 @@ form, input {
 
 form {
      padding-top: 30%;
-}
+} */
