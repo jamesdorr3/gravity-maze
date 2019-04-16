@@ -10,9 +10,9 @@ class PlayersController < ApplicationController
       render json: player
     end
 
-    def leaderboard
-      leaderboard = Player.leaderboard
-      render json: leaderboard
+    def highscores
+      highscores = Player.highscores
+      render json: highscores
     end
 
     private
