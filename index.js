@@ -12,12 +12,12 @@ Player.all = [];
 let gravityDirection = 'down';
 
 document.addEventListener('DOMContentLoaded', e => {
-  login();
-  makeLeaderboard()
+  // login();
+  // makeLeaderboard()
 })
 
-let x = 200;
-let y = 200;
+let x = 50;
+let y = 650;
 let gravity = 0.3;
 
 
@@ -27,19 +27,45 @@ let gravitySpeed = 0;
 
 function preload() {
   rest = loadImage(fetchURL + 'Fruits_Papaya_2D_Game_Asset/actions/rest/0001.png');
+  restU = loadImage(fetchURL + 'Fruits_Papaya_2D_Game_Asset/actions/rest/0001u.png');
+  restL = loadImage(fetchURL + 'Fruits_Papaya_2D_Game_Asset/actions/rest/0001l.png');
+  restR = loadImage(fetchURL + 'Fruits_Papaya_2D_Game_Asset/actions/rest/0001r.png');
   doorImg = loadImage('http://localhost:3000/moondoor.png')
+  coneUpImg = loadImage(fetchURL + 'coneUp.png')
+  coneDownImg = loadImage(fetchURL + 'coneDown.png')
+  coneLeftImg = loadImage(fetchURL + 'coneLeft.png')
+  coneRightImg = loadImage(fetchURL + 'coneRight.png')
 }
 
 function setup() {
+  createCanvas(1000, 700);
+
   door = createSprite(
     940, 605, 50, 85);
   door.addImage(doorImg, 0, 0)
   door.scale = .4
 
-  createCanvas(1000, 700);
+  coneUp = createSprite(
+    500, 630, 10, 70);
+  coneUp.addImage(coneUpImg, 0, 0)
+  
+  coneDown = createSprite(
+    1000, 70, 1, 70);
+  coneDown.addImage(coneDownImg, 0, 0)
+  
+  coneLeft = createSprite(
+    930, 300, 1, 70);
+  coneLeft.addImage(coneLeftImg, 0, 0)
+  
+  coneRight = createSprite(
+    70, 350, 1, 70);
+  coneRight.addImage(coneRightImg, 0, 0)
+
+
   player = createSprite(
     x, y, 50, 100);
   player.addImage(rest, 0, 0)
+
 }
 
 
@@ -144,9 +170,25 @@ function draw() {
       break;
   }
 
-  // if (ell.overlap(upTri)) {
-  //   console.log('win')
-  // }
+  if (player.overlap(coneUp)) {
+    gravityDirection = 'up'
+  }
+
+  if (player.overlap(coneDown)) {
+    gravityDirection = 'down'
+  }
+
+  if (player.overlap(coneLeft)) {
+    gravityDirection = 'left'
+  }
+
+  if (player.overlap(coneRight)) {
+    gravityDirection = 'right'
+  }
+
+  if (player.overlapPoint(950, 690)) {
+    console.log('You win!')
+  }
 
 }
 
