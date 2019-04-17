@@ -9,36 +9,43 @@ class Player {
   }
 }
 Player.all = [];
-let gravityDirection = 'down';
 
 document.addEventListener('DOMContentLoaded', e => {
   // login();
   // makeLeaderboard()
 })
 
-let x = 50;
-let y = 650;
+// ^^ JS SETUP ^^
+// vv GAME MECHANICS vv
+
+// GLOBAL VARIABLES
+
+let gravityDirection = 'down';
+// let x = 50;
+// let y = 650;
 let gravity = 0.3;
 
 
 let xSpeed = 0;
 let ySpeed = 0;
 let gravitySpeed = 0;
-var restU;
 
-function preload() {
+// REQUIRED FUNCTIONS
+
+function preload() { ////////////////////////////////OPEN PRELOAD
   rest = loadImage(fetchURL + 'Fruits_Papaya_2D_Game_Asset/actions/rest/0001.png');
-  restU = loadImage(fetchURL + 'Fruits_Papaya_2D_Game_Asset/actions/rest/0001u.png');
-  restL = loadImage(fetchURL + 'Fruits_Papaya_2D_Game_Asset/actions/rest/0001l.png');
-  restR = loadImage(fetchURL + 'Fruits_Papaya_2D_Game_Asset/actions/rest/0001r.png');
+  // restU = loadImage(fetchURL + 'Fruits_Papaya_2D_Game_Asset/actions/rest/0001u.png');
+  // restL = loadImage(fetchURL + 'Fruits_Papaya_2D_Game_Asset/actions/rest/0001l.png');
+  // restR = loadImage(fetchURL + 'Fruits_Papaya_2D_Game_Asset/actions/rest/0001r.png');
   doorImg = loadImage('http://localhost:3000/moondoor.png')
   coneUpImg = loadImage(fetchURL + 'coneUp.png')
   coneDownImg = loadImage(fetchURL + 'coneDown.png')
   coneLeftImg = loadImage(fetchURL + 'coneLeft.png')
   coneRightImg = loadImage(fetchURL + 'coneRight.png')
-}
+} ////////////////////////////////////////////////// CLOSE PRELOAD
 
-function setup() {
+
+function setup() { //////////////////////////////// OPEN SETUP
   createCanvas(1000, 700);
 
   door = createSprite(
@@ -66,15 +73,18 @@ function setup() {
     650, 300, 10, 100
   );
 
+  wall2 = createSprite(
+    650, 25, 10, 50
+  );
+
   player = createSprite(  // PLAYER ALWAYS LAST SO SHE'S ABOVE OTHERS
-    x, y, 50, 100);
+    50, 600, 50, 100);
   player.addImage(rest, 0, 0)
   player.setCollider("rectangle", 0, 0, 50, 100)
+} //////////////////////////////////////////////// CLOSE SETUP
 
-}
 
-
-function draw() {
+function draw() { /////////////////////////////// START DRAW
   clear();
   background(250, 250, 250, 100);
   fill(0);
@@ -85,27 +95,24 @@ function draw() {
   // const upTri = triangle (300, 390, 310, 340, 320, 390)
   drawSprites();
 
-  player.position.x = x;
-  player.position.y = y;
-
   //x = x + 1;
 
   if (keyIsDown(LEFT_ARROW)) {
     player.mirrorX(-1)
-    x -= 5;
+    player.position.x -= 5;
   }
   if(keyIsDown(RIGHT_ARROW)) {
     player.mirrorX(1)
-    x += 5;
+    player.position.x += 5;
   }
   if (keyIsDown(DOWN_ARROW)) {
-    y += 5;
+    player.position.y += 5;
   }
   if (keyIsDown(UP_ARROW)) {
-    y -= 5;
+    player.position.y -= 5;
   }
   if (keyIsDown(SHIFT)) {
-    y -= 5;
+    player.position.y -= 5;
   }
 
   // if (x > 335 && y > 295) {
@@ -120,65 +127,65 @@ function draw() {
   switch (gravityDirection) {
     case 'down':
       player.mirrorY(1)
-      if (x > width - 25){
-        x = width - 25;}
-      else if (x < 0 + 25){
-        x = 0 + 25;}
-      else if (y > height - 50) {
-        y = height - 50;
+      if (player.position.x > width - 25){
+        player.position.x = width - 25;}
+      else if (player.position.x < 0 + 25){
+        player.position.x = 0 + 25;}
+      else if (player.position.y > height - 50) {
+        player.position.y = height - 50;
         gravitySpeed = 0;}
-      else if (y < 0 + 50) {
-        y = 0 + 50;
+      else if (player.position.y < 0 + 50) {
+        player.position.y = 0 + 50;
         gravitySpeed = 0;}
       gravitySpeed += gravity;
-      x += xSpeed;
-      y += ySpeed + gravitySpeed;
+      player.position.x += xSpeed;
+      player.position.y += ySpeed + gravitySpeed;
       break;
     case 'up':
       player.mirrorY(-1)
-      if (x > width - 25){
-        x = width - 25;}
-      else if (x < 0 + 25){
-        x = 0 + 25;}
-      else if (y > height - 50) {
-        y = height - 50;
+      if (player.position.x > width - 25){
+        player.position.x = width - 25;}
+      else if (player.position.x < 0 + 25){
+        player.position.x = 0 + 25;}
+      else if (player.position.y > height - 50) {
+        player.position.y = height - 50;
         gravitySpeed = 0;}
-      else if (y < 0 + 50) {
-        y = 0 + 50;
+      else if (player.position.y < 0 + 50) {
+        player.position.y = 0 + 50;
         gravitySpeed = 0;}
       gravitySpeed += gravity;
-      x += xSpeed;
-      y -= ySpeed + gravitySpeed;
+      player.position.x += xSpeed;
+      player.position.y -= ySpeed + gravitySpeed;
       break;
     case 'left':
-      if (x > width - 25){
-        x = width - 25;
+      if (player.position.x > width - 25){
+        player.position.x = width - 25;
         gravitySpeed = 0;}
-      else if (x < 0 + 25){
-        x = 0 + 25;
+      else if (player.position.x < 0 + 25){
+        player.position.x = 0 + 25;
         gravitySpeed = 0;}
-      else if (y > height - 50) {
-        y = height - 50;}
-      else if (y < 0 + 50) {
-        y = 0 + 50;}
+      else if (player.position.y > height - 50) {
+        player.position.y = height - 50;}
+      else if (player.position.y < 0 + 50) {
+        player.position.y = 0 + 50;}
       gravitySpeed += gravity;
-      x -= xSpeed + gravitySpeed;
-      y += ySpeed;
+      player.position.x -= xSpeed + gravitySpeed;
+      player.position.y += ySpeed;
       break;
     case 'right':
-      if (x > width - 25){
-        x = width - 25;
+      if (player.position.x > width - 25){
+        player.position.x = width - 25;
         gravitySpeed = 0;}
-      else if (x < 0 + 25){
-        x = 0 + 25;
+      else if (player.position.x < 0 + 25){
+        player.position.x = 0 + 25;
         gravitySpeed = 0;}
-      else if (y > height - 50) {
-        y = height - 50;}
-      else if (y < 0 + 50) {
-        y = 0 + 50;}
+      else if (player.position.y > height - 50) {
+        player.position.y = height - 50;}
+      else if (player.position.y < 0 + 50) {
+        player.position.y = 0 + 50;}
       gravitySpeed += gravity;
-      x += xSpeed + gravitySpeed;
-      y += ySpeed;
+      player.position.x += xSpeed + gravitySpeed;
+      player.position.y += ySpeed;
       break;
   }
 
@@ -198,28 +205,16 @@ function draw() {
     gravityDirection = 'right'
   }
 
-  if (player.overlapPoint(950, 690)) {
+  if (player.overlap(door)) {
     console.log('You win!')
   }
 
-  if (player.collide(wall)) {
-    ySpeed = 0;
+  if (player.collide(wall) || player.collide(wall2)) {
     xSpeed = 0;
     gravitySpeed = 0
   }
 
-  // WALL
-
-  if (player.position.x <= 655 &&
-    player.position.x > 650 &&
-    player.position.y < 350 &&
-    player.position.y > 250) {
-      x = 655;
-    }
-    
-    // 650, 300, 10, 100
-
-} // CLOSE DRAW
+} //////////////////////////////////////////////// CLOSE DRAW
 
 
 // function keyPressed() {
