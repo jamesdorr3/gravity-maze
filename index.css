@@ -7,11 +7,12 @@ html {
      float: left;
 }
 
-.leaderboard {
-     background-color: lime;
+div.leaderboard {
+     background-color: rgba(255, 255, 255, 0.8);
      float: right;
      padding: 5px;
      list-style: none;
+     width: 400px
 }
 
 #login {
@@ -37,7 +38,7 @@ h1 {
      width: 1000px;
      height: 400px;
      top: 0px;
-     margin-top: 9px;
+     margin-top: 8px;
      background-color: black;
      color: white;
      z-index: 1;
