@@ -1,3 +1,7 @@
+html {
+     background-color: darkblue;
+}
+
 #defaultCanvas0 {
      float: left;
 }
@@ -9,13 +13,14 @@
      list-style: none;
 }
 
-/* #login {
-     z-index: 1;
-     background-color:rgba(255, 255, 255, 0.726);
+#login {
+     z-index: 2;
+     background-color:rgba(255, 255, 255, 0.9);
      position: absolute;
-     height: 90%;
-     width: 90%;
-     margin: 5%;
+     height: 500px;
+     width: 800px;
+     margin-top: 100px;
+     margin-left: 100px;
 } 
 
 form, input {
@@ -24,5 +29,18 @@ form, input {
 }
 
 form {
-     padding-top: 30%;
-} */
+     padding-top: 10%;
+}
+
+h1 {
+     width: 1000px;
+     height: 400px;
+     top: 0px;
+     margin-top: 9px;
+     background-color: black;
+     color: white;
+     z-index: 1;
+     position: absolute;
+     text-align: center;
+     padding-top: 300px;
+}

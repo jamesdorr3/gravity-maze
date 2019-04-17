@@ -24,6 +24,7 @@ let gravity = 0.3;
 let xSpeed = 0;
 let ySpeed = 0;
 let gravitySpeed = 0;
+var restU;
 
 function preload() {
   rest = loadImage(fetchURL + 'Fruits_Papaya_2D_Game_Asset/actions/rest/0001.png');
@@ -61,8 +62,11 @@ function setup() {
     70, 350, 1, 70);
   coneRight.addImage(coneRightImg, 0, 0)
 
+  wall = createSprite(
+    650, 300, 5, 100
+  );
 
-  player = createSprite(
+  player = createSprite(  // PLAYER ALWAYS LAST SO SHE'S ABOVE OTHERS
     x, y, 50, 100);
   player.addImage(rest, 0, 0)
 
@@ -70,7 +74,8 @@ function setup() {
 
 
 function draw() {
-  background(0, 255, 0);
+  clear();
+  background(1, 1, 1, 90);
   fill(0);
   // rect(x,y,50,100);
   // fill(0);
@@ -119,7 +124,8 @@ function draw() {
         y = height - 50;
         gravitySpeed = 0;}
       else if (y < 0 + 50) {
-        y = 0 + 50;}
+        y = 0 + 50;
+        gravitySpeed = 0;}
       gravitySpeed += gravity;
       x += xSpeed;
       y += ySpeed + gravitySpeed;
@@ -130,7 +136,8 @@ function draw() {
       else if (x < 0 + 25){
         x = 0 + 25;}
       else if (y > height - 50) {
-        y = height - 50;}
+        y = height - 50;
+        gravitySpeed = 0;}
       else if (y < 0 + 50) {
         y = 0 + 50;
         gravitySpeed = 0;}
@@ -190,6 +197,12 @@ function draw() {
     console.log('You win!')
   }
 
+  if (player.collide(wall)) {
+    ySpeed = 0;
+    xSpeed = 0;
+    gravitySpeed = 0
+  }
+
 }
 
 
@@ -241,7 +254,14 @@ function submitListener() {
     findOrCreatePlayer(name);
     document.getElementById('login').remove();
     document.querySelector('.leaderboard h2').innerText = name;
+    setTimeout(function() {
+      document.querySelector('h1').style.display = 'none'
+    }, 3000)
   })
+}
+
+function test() {
+  document.querySelector('h1').style.display = 'none'
 }
 
 function findOrCreatePlayer(name) {
