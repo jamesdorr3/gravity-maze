@@ -49,15 +49,15 @@ function setup() {
   coneUp = createSprite(
     500, 630, 10, 70);
   coneUp.addImage(coneUpImg, 0, 0)
-  
+
   coneDown = createSprite(
     1000, 70, 1, 70);
   coneDown.addImage(coneDownImg, 0, 0)
-  
+
   coneLeft = createSprite(
     930, 300, 1, 70);
   coneLeft.addImage(coneLeftImg, 0, 0)
-  
+
   coneRight = createSprite(
     70, 350, 1, 70);
   coneRight.addImage(coneRightImg, 0, 0)
@@ -75,7 +75,7 @@ function setup() {
 
 function draw() {
   clear();
-  background(1, 1, 1, 90);
+  background(250, 250, 250, 100);
   fill(0);
   // rect(x,y,50,100);
   // fill(0);
@@ -106,7 +106,7 @@ function draw() {
   }
 
   // if (x > 335 && y > 295) {
-    
+
   // }
 
   // if (x > 280 && x < 325 && y > 350) {

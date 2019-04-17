@@ -1,5 +1,6 @@
 html {
-     background-color: darkblue;
+     background-image: url('public/background/starbg.jpg');
+     background-size: 1400px 900px
 }
 
 #defaultCanvas0 {
@@ -21,7 +22,7 @@ html {
      width: 800px;
      margin-top: 100px;
      margin-left: 100px;
-} 
+}
 
 form, input {
      text-align: center;
