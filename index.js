@@ -12,7 +12,7 @@ Player.all = [];
 let gravityDirection = 'down';
 
 document.addEventListener('DOMContentLoaded', e => {
-  login();
+  // login();
   makeLeaderboard()
 })
 
@@ -69,12 +69,13 @@ function setup() {
   player = createSprite(  // PLAYER ALWAYS LAST SO SHE'S ABOVE OTHERS
     x, y, 50, 100);
   player.addImage(rest, 0, 0)
+  player.setCollider("rectangle", 0, 0, 50, 100)
 
 }
 
 
 function draw() {
-  // clear();
+  clear();
   background(250, 250, 250, 100);
   fill(0);
   // rect(x,y,50,100);
@@ -90,9 +91,11 @@ function draw() {
   //x = x + 1;
 
   if (keyIsDown(LEFT_ARROW)) {
+    player.mirrorX(-1)
     x -= 5;
   }
   if(keyIsDown(RIGHT_ARROW)) {
+    player.mirrorX(1)
     x += 5;
   }
   if (keyIsDown(DOWN_ARROW)) {
@@ -116,6 +119,7 @@ function draw() {
   // Gravity
   switch (gravityDirection) {
     case 'down':
+      player.mirrorY(1)
       if (x > width - 25){
         x = width - 25;}
       else if (x < 0 + 25){
@@ -131,6 +135,7 @@ function draw() {
       y += ySpeed + gravitySpeed;
       break;
     case 'up':
+      player.mirrorY(-1)
       if (x > width - 25){
         x = width - 25;}
       else if (x < 0 + 25){
