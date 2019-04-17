@@ -12,8 +12,8 @@ Player.all = [];
 let gravityDirection = 'down';
 
 document.addEventListener('DOMContentLoaded', e => {
-  // login();
-  // makeLeaderboard()
+  login();
+  makeLeaderboard()
 })
 
 let x = 50;
