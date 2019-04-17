@@ -13,7 +13,7 @@ let gravityDirection = 'down';
 
 document.addEventListener('DOMContentLoaded', e => {
   // login();
-  makeLeaderboard()
+  // makeLeaderboard()
 })
 
 let x = 50;
@@ -63,7 +63,7 @@ function setup() {
   coneRight.addImage(coneRightImg, 0, 0)
 
   wall = createSprite(
-    650, 300, 5, 100
+    650, 300, 10, 100
   );
 
   player = createSprite(  // PLAYER ALWAYS LAST SO SHE'S ABOVE OTHERS
@@ -208,7 +208,18 @@ function draw() {
     gravitySpeed = 0
   }
 
-}
+  // WALL
+
+  if (player.position.x <= 655 &&
+    player.position.x > 650 &&
+    player.position.y < 350 &&
+    player.position.y > 250) {
+      x = 655;
+    }
+    
+    // 650, 300, 10, 100
+
+} // CLOSE DRAW
 
 
 // function keyPressed() {
