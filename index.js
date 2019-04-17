@@ -74,7 +74,7 @@ function setup() {
 
 
 function draw() {
-  clear();
+  // clear();
   background(250, 250, 250, 100);
   fill(0);
   // rect(x,y,50,100);
