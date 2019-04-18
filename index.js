@@ -1,5 +1,8 @@
 
 const fetchURL = 'http://localhost:3000/'
+
+let level = 1
+
 class Player {
   constructor(id, name, score) {
     this.id = id;
@@ -34,22 +37,31 @@ let jumpRight = 0
 
 // REQUIRED FUNCTIONS
 
-function preload() { ////////////////////////////////OPEN PRELOAD
+
+  function preload() { ////////////////////////////////OPEN PRELOAD
   rest = loadImage(fetchURL + 'Fruits_Papaya_2D_Game_Asset/actions/rest/0001.png');
   walkAnim = loadAnimation( `/Fruits_Papaya_2D_Game_Asset/actions/run/0001.png`,
   `/Fruits_Papaya_2D_Game_Asset/actions/run/0029.png`
   )
   restL = loadImage(fetchURL + 'Fruits_Papaya_2D_Game_Asset/actions/rest/0001l.png');
+
+  restR = loadImage(fetchURL + 'Fruits_Papaya_2D_Game_Asset/actions/rest/0001r.png');
+  restDown = loadImage(fetchURL + 'Fruits_Papaya_2D_Game_Asset/actions/rest/0001u.png');
+  // restR = loadImage(fetchURL + 'Fruits_Papaya_2D_Game_Asset/actions/rest/0001r.png');
+
   fire = loadImage(fetchURL + 'fire.png');
+
   doorImg = loadImage('http://localhost:3000/moondoor.png')
   coneUpImg = loadImage(fetchURL + 'coneUp.png')
   coneDownImg = loadImage(fetchURL + 'coneDown.png')
   coneLeftImg = loadImage(fetchURL + 'coneLeft.png')
   coneRightImg = loadImage(fetchURL + 'coneRight.png')
+
 } ////////////////////////////////////////////////// CLOSE PRELOAD
 
 
-function setup() { //////////////////////////////// OPEN SETUP
+  function setup() { //////////////////////////////// OPEN SETUP
+
   createCanvas(1000, 700);
 
   door = createSprite(
@@ -105,7 +117,7 @@ function setup() { //////////////////////////////// OPEN SETUP
   );
   deathPic.addImage(fire)
 
-    
+
   player = createSprite(  // PLAYER ALWAYS LAST SO SHE'S ABOVE OTHERS
   100, 50, 30, 100);
   player.addImage(rest, 0, 0)
@@ -113,7 +125,7 @@ function setup() { //////////////////////////////// OPEN SETUP
   // player.changeAnimation('walk')
   player.setCollider("rectangle", 0, 0, 50, 100)
   } //////////////////////////////////////////////// CLOSE SETUP
-  
+
 function draw() { /////////////////////////////// START DRAW
   clear();
   background(250, 250, 250, 100);
@@ -228,8 +240,8 @@ function draw() { /////////////////////////////// START DRAW
 
   function hardFloor(sprite) {
     if ( // down
-      player.position.x + (player.originalWidth / 2) > sprite.position.x - (sprite._internalWidth / 2) && 
-      player.position.x - (player.originalWidth / 2) < sprite.position.x + (sprite._internalWidth / 2) && 
+      player.position.x + (player.originalWidth / 2) > sprite.position.x - (sprite._internalWidth / 2) &&
+      player.position.x - (player.originalWidth / 2) < sprite.position.x + (sprite._internalWidth / 2) &&
       player.position.y + (player.originalHeight / 2) >= sprite.position.y - (sprite._internalHeight /2) &&
       player.position.y + (player.originalHeight / 2) <= sprite.position.y
     ){
@@ -240,7 +252,7 @@ function draw() { /////////////////////////////// START DRAW
   function hardRight(sprite) {
     if ( // left
       player.position.y + (player.originalHeight / 2) > sprite.position.y - (sprite._internalHeight / 2) &&
-      player.position.y - (player.originalHeight / 2) < sprite.position.y + (sprite._internalHeight / 2) && 
+      player.position.y - (player.originalHeight / 2) < sprite.position.y + (sprite._internalHeight / 2) &&
       player.position.x + (player.originalWidth / 2) >= sprite.position.x - (sprite._internalWidth / 2) &&
       player.position.x + (player.originalWidth / 2) <= sprite.position.x
       ){
@@ -251,7 +263,7 @@ function draw() { /////////////////////////////// START DRAW
   function hardLeft(sprite) {
     if ( // right
       player.position.y + (player.originalHeight / 2) > sprite.position.y - (sprite._internalHeight / 2) &&
-      player.position.y - (player.originalHeight / 2) < sprite.position.y + (sprite._internalHeight / 2) && 
+      player.position.y - (player.originalHeight / 2) < sprite.position.y + (sprite._internalHeight / 2) &&
       player.position.x - (player.originalWidth / 2) <= sprite.position.x + (sprite._internalWidth / 2) &&
       player.position.x - (player.originalWidth / 2) >= sprite.position.x
       ){
@@ -261,8 +273,8 @@ function draw() { /////////////////////////////// START DRAW
   }
   function hardCeiling(sprite) {
     if ( // up
-      player.position.x + (player.originalWidth / 2) > sprite.position.x - (sprite._internalWidth / 2) && 
-      player.position.x - (player.originalWidth / 2) < sprite.position.x + (sprite._internalWidth / 2) && 
+      player.position.x + (player.originalWidth / 2) > sprite.position.x - (sprite._internalWidth / 2) &&
+      player.position.x - (player.originalWidth / 2) < sprite.position.x + (sprite._internalWidth / 2) &&
       player.position.y - (player.originalHeight / 2) <= sprite.position.y + (sprite._internalHeight /2) &&
       player.position.y - (player.originalHeight / 2) >= sprite.position.y //- (sprite._internalHeight /2)
     ){
