@@ -41,13 +41,13 @@ let jumpRight = 0
   function preload() { ////////////////////////////////OPEN PRELOAD
   rest = loadImage(fetchURL + 'Fruits_Papaya_2D_Game_Asset/actions/rest/0001.png');
   restL = loadImage(fetchURL + 'Fruits_Papaya_2D_Game_Asset/actions/rest/0001l.png');
-<<<<<<< HEAD
+
   restR = loadImage(fetchURL + 'Fruits_Papaya_2D_Game_Asset/actions/rest/0001r.png');
   restDown = loadImage(fetchURL + 'Fruits_Papaya_2D_Game_Asset/actions/rest/0001u.png');
   // restR = loadImage(fetchURL + 'Fruits_Papaya_2D_Game_Asset/actions/rest/0001r.png');
-=======
+
   fire = loadImage(fetchURL + 'fire.png');
->>>>>>> 3d59d963bdd21910d88478d02403381bd1682900
+
   doorImg = loadImage('http://localhost:3000/moondoor.png')
   coneUpImg = loadImage(fetchURL + 'coneUp.png')
   coneDownImg = loadImage(fetchURL + 'coneDown.png')
@@ -114,165 +114,13 @@ let jumpRight = 0
   );
   deathPic.addImage(fire)
 
-    
+
   player = createSprite(  // PLAYER ALWAYS LAST SO SHE'S ABOVE OTHERS
   100, 50, 30, 100);
   player.addImage(rest, 0, 0)
   player.setCollider("rectangle", 0, 0, 50, 100)
-<<<<<<< HEAD
-
-  // create a sprite for every angle of the player. Every interaction with a cone. left cone with left player
-
-} //////////////////////////////////////////////// CLOSE SETUP
-
-  function draw() { /////////////////////////////// START DRAW
-    if (level === 1){
-  // clear();
-  // background(250, 250, 250, 100);
-  // fill(0);
-  // // rect(x,y,50,100);
-  // // fill(0);
-  // // rect(360, 320, 40, 80);
-  // // fill(250)
-  // // const upTri = triangle (300, 390, 310, 340, 320, 390)
-  // drawSprites();
-  //
-  // //x = x + 1;
-  //
-  // if (keyIsDown(LEFT_ARROW)) {
-  //   player.mirrorX(-1)
-  //   player.position.x -= 5;
-  // }
-  // if(keyIsDown(RIGHT_ARROW)) {
-  //   player.mirrorX(1)
-  //   player.position.x += 5;
-  // }
-  // if (keyIsDown(DOWN_ARROW)) {
-  //   player.position.y += 5;
-  // }
-  // if (keyIsDown(UP_ARROW)) {
-  //   player.position.y -= 5;
-  // }
-  // if (keyIsDown(SHIFT)) {
-  //   player.position.y -= 5;
-  // }
-  //
-  // // Gravity
-  // switch (gravityDirection) {
-  //   case 'down':
-  //     player.mirrorY(1)
-  //     if (player.position.x > width - 25){
-  //       player.position.x = width - 25;}
-  //     else if (player.position.x < 0 + 25){
-  //       player.position.x = 0 + 25;}
-  //     else if (player.position.y > height - 50) {
-  //       player.position.y = height - 50;
-  //       gravitySpeed = 0;}
-  //     else if (player.position.y < 0 + 50) {
-  //       player.position.y = 0 + 50;
-  //       gravitySpeed = 0;}
-  //     gravitySpeed += gravity;
-  //     player.position.x += xSpeed;
-  //     player.position.y += ySpeed + gravitySpeed;
-  //     break;
-  //   case 'up':
-  //     player.mirrorY(-1)
-  //     if (player.position.x > width - 25){
-  //       player.position.x = width - 25;}
-  //     else if (player.position.x < 0 + 25){
-  //       player.position.x = 0 + 25;}
-  //     else if (player.position.y > height - 50) {
-  //       player.position.y = height - 50;
-  //       gravitySpeed = 0;}
-  //     else if (player.position.y < 0 + 50) {
-  //       player.position.y = 0 + 50;
-  //       gravitySpeed = 0;}
-  //     gravitySpeed += gravity;
-  //     player.position.x += xSpeed;
-  //     player.position.y -= ySpeed + gravitySpeed;
-  //     break;
-  //   case 'left':
-  //     if (player.position.x > width - 25){
-  //       player.position.x = width - 25;
-  //       gravitySpeed = 0;}
-  //     else if (player.position.x < 0 + 25){
-  //       player.position.x = 0 + 25;
-  //       gravitySpeed = 0;}
-  //     else if (player.position.y > height - 50) {
-  //       player.position.y = height - 50;}
-  //     else if (player.position.y < 0 + 50) {
-  //       player.position.y = 0 + 50;}
-  //     gravitySpeed += gravity;
-  //     player.position.x -= xSpeed + gravitySpeed;
-  //     player.position.y += ySpeed;
-  //     break;
-  //   case 'right':
-  //     if (player.position.x > width - 25){
-  //       player.position.x = width - 25;
-  //       gravitySpeed = 0;}
-  //     else if (player.position.x < 0 + 25){
-  //       player.position.x = 0 + 25;
-  //       gravitySpeed = 0;}
-  //     else if (player.position.y > height - 50) {
-  //       player.position.y = height - 50;}
-  //     else if (player.position.y < 0 + 50) {
-  //       player.position.y = 0 + 50;}
-  //     gravitySpeed += gravity;
-  //     player.position.x += xSpeed + gravitySpeed;
-  //     player.position.y += ySpeed;
-  //     break;
-  // }
-  //
-  // if (player.overlap(coneUp)) {
-  //   gravityDirection = 'up'
-  // }
-  //
-  // if (player.overlap(coneDown)) {
-  //   // debugger
-  //   gravityDirection = 'down'
-  // }
-  //
-  // if (player.overlap(coneLeft)) {
-  //   gravityDirection = 'left'
-  // }
-  //
-  // if (player.overlap(coneRight)) {
-  //   gravityDirection = 'right'
-  // }
-  //
-  // // if (player.overlap(door)) {
-  // //   console.log('You win!')
-  // // }
-  //
-  // if (player.overlap(door)) {
-  //   // noLoop();
-  //   level = 2
-  //
-  // }
-  //
-  // // function game () {
-  // //   // debugger
-  // // console.log("game")
-  // // }
-  //
-  //
-  // if (player.collide(wall) || player.collide(wall2)) {
-  //   xSpeed = 0;
-  //   gravitySpeed = 0
-  // }
-  //////////////////// END OF LEVEL 1
-  level1()
- }else if (level = 2){
-  level2()
-}else if (level = 3){
-  level3()
-}
-}//////////////////////////////////////////////// CLOSE DRAW
-
-
-=======
   } //////////////////////////////////////////////// CLOSE SETUP
-  
+
 function draw() { /////////////////////////////// START DRAW
   clear();
   background(250, 250, 250, 100);
@@ -387,8 +235,8 @@ function draw() { /////////////////////////////// START DRAW
 
   function hardFloor(sprite) {
     if ( // down
-      player.position.x + (player.originalWidth / 2) > sprite.position.x - (sprite._internalWidth / 2) && 
-      player.position.x - (player.originalWidth / 2) < sprite.position.x + (sprite._internalWidth / 2) && 
+      player.position.x + (player.originalWidth / 2) > sprite.position.x - (sprite._internalWidth / 2) &&
+      player.position.x - (player.originalWidth / 2) < sprite.position.x + (sprite._internalWidth / 2) &&
       player.position.y + (player.originalHeight / 2) >= sprite.position.y - (sprite._internalHeight /2) &&
       player.position.y + (player.originalHeight / 2) <= sprite.position.y
     ){
@@ -399,7 +247,7 @@ function draw() { /////////////////////////////// START DRAW
   function hardRight(sprite) {
     if ( // left
       player.position.y + (player.originalHeight / 2) > sprite.position.y - (sprite._internalHeight / 2) &&
-      player.position.y - (player.originalHeight / 2) < sprite.position.y + (sprite._internalHeight / 2) && 
+      player.position.y - (player.originalHeight / 2) < sprite.position.y + (sprite._internalHeight / 2) &&
       player.position.x + (player.originalWidth / 2) >= sprite.position.x - (sprite._internalWidth / 2) &&
       player.position.x + (player.originalWidth / 2) <= sprite.position.x
       ){
@@ -410,7 +258,7 @@ function draw() { /////////////////////////////// START DRAW
   function hardLeft(sprite) {
     if ( // right
       player.position.y + (player.originalHeight / 2) > sprite.position.y - (sprite._internalHeight / 2) &&
-      player.position.y - (player.originalHeight / 2) < sprite.position.y + (sprite._internalHeight / 2) && 
+      player.position.y - (player.originalHeight / 2) < sprite.position.y + (sprite._internalHeight / 2) &&
       player.position.x - (player.originalWidth / 2) <= sprite.position.x + (sprite._internalWidth / 2) &&
       player.position.x - (player.originalWidth / 2) >= sprite.position.x
       ){
@@ -420,8 +268,8 @@ function draw() { /////////////////////////////// START DRAW
   }
   function hardCeiling(sprite) {
     if ( // up
-      player.position.x + (player.originalWidth / 2) > sprite.position.x - (sprite._internalWidth / 2) && 
-      player.position.x - (player.originalWidth / 2) < sprite.position.x + (sprite._internalWidth / 2) && 
+      player.position.x + (player.originalWidth / 2) > sprite.position.x - (sprite._internalWidth / 2) &&
+      player.position.x - (player.originalWidth / 2) < sprite.position.x + (sprite._internalWidth / 2) &&
       player.position.y - (player.originalHeight / 2) <= sprite.position.y + (sprite._internalHeight /2) &&
       player.position.y - (player.originalHeight / 2) >= sprite.position.y //- (sprite._internalHeight /2)
     ){
@@ -442,7 +290,6 @@ function draw() { /////////////////////////////// START DRAW
   hardRight(rightWall)
   platform(platformLeft)
   platform(platformRight)
->>>>>>> 3d59d963bdd21910d88478d02403381bd1682900
 
 } //////////////////////////////////////////////// CLOSE DRAW
 
