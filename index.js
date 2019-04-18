@@ -1,8 +1,6 @@
 
 const fetchURL = 'http://localhost:3000/'
 
-let level = 1
-
 class Player {
   constructor(id, name, score) {
     this.id = id;
@@ -24,6 +22,7 @@ document.addEventListener('DOMContentLoaded', e => {
 // GLOBAL VARIABLES
 
 let lives = 3
+let level = 1
 
 let gravityDirection = 'down';
 let gravityX = 0;
@@ -39,16 +38,49 @@ let jumpRight = 0
 
 
 function preload() { ////////////////////////////////OPEN PRELOAD
-    level1Preload()
+  switch (level) {
+    case 1:
+      level1Preload()
+      break
+    case 2:
+      level2Preload()
+      break
+  }
 } ////////////////////////////////////////////////// CLOSE PRELOAD
 
 
 function setup() { //////////////////////////////// OPEN SETUP
-  level1Setup()
+  switch (level) {
+    case 1:
+      level1Setup()
+      break
+    case 2:
+      coneUp.remove()
+      coneUp2.remove()
+      coneDown.remove()
+      coneDown2.remove()
+      player.remove()
+      door.remove()
+      death.remove()
+      deathPic.remove()
+      platformLeft.remove()
+      platformRight.remove()
+      level2Setup()
+      break
+  }
 } //////////////////////////////////////////////// CLOSE SETUP
 
 function draw() { /////////////////////////////// START DRAW
-  level1Draw()
+  switch (level) {
+    case 1:
+      level1Draw()
+      break
+    case 2:
+      clear()
+      document.querySelector('canvas').getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
+      level2Draw()
+      break
+  }
 } //////////////////////////////////////////////// CLOSE DRAW
 
 //////////////////////////////////////////////// START FUNCTIONS

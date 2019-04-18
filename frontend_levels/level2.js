@@ -1,4 +1,4 @@
-function level1Preload() {
+function level2Preload() {
   rest = loadImage(fetchURL + 'Fruits_Papaya_2D_Game_Asset/actions/rest/0001.png');
   walkAnim = loadAnimation( `/Fruits_Papaya_2D_Game_Asset/actions/run/0001.png`,
   `/Fruits_Papaya_2D_Game_Asset/actions/run/0029.png`
@@ -17,62 +17,62 @@ function level1Preload() {
   coneLeftImg = loadImage(fetchURL + 'coneLeft.png')
   coneRightImg = loadImage(fetchURL + 'coneRight.png')
 }
-function level1Setup() {
 
+function level2Setup() {
   createCanvas(1000, 700);
 
   door = createSprite(
-    940, 400, 50, 85);
+    900, 400, 50, 85);
   door.addImage(doorImg, 0, 0)
   door.scale = .4
 
-  coneUp = createSprite(
-    275, 500, 10, 70);
-  coneUp.addImage(coneUpImg, 0, 0)
+  // coneUp = createSprite(
+  //   275, 500, 10, 70);
+  // coneUp.addImage(coneUpImg, 0, 0)
 
-  coneDown = createSprite(
-    950, 70, 1, 70);
-  coneDown.addImage(coneDownImg, 0, 0)
+  // coneDown = createSprite(
+  //   950, 70, 1, 70);
+  // coneDown.addImage(coneDownImg, 0, 0)
 
-  coneUp2 = createSprite(
-    20, 250, 1, 70);
-  coneUp2.addImage(coneUpImg, 0, 0)
+  // coneUp2 = createSprite(
+  //   20, 250, 1, 70);
+  // coneUp2.addImage(coneUpImg, 0, 0)
 
-  coneDown2 = createSprite(
-    250, 50, 1, 70);
-  coneDown2.addImage(coneDownImg, 0, 0)
+  // coneDown2 = createSprite(
+  //   250, 50, 1, 70);
+  // coneDown2.addImage(coneDownImg, 0, 0)
 
-  ceiling = createSprite(
-    500, -50, 1100, 100
-  )
-  floor = createSprite(
-    500, 750, 1100, 100
-  )
-  leftWall = createSprite(
-    -50, 350, 100, 1100
-  )
-  rightWall = createSprite(
-    1050, 350, 100, 1100
-  )
+  // ceiling = createSprite(
+  //   500, -50, 1100, 100
+  // )
+  // floor = createSprite(
+  //   500, 750, 1100, 100
+  // )
+  // leftWall = createSprite(
+  //   -50, 350, 100, 1100
+  // )
+  // rightWall = createSprite(
+  //   1050, 350, 100, 1100
+  // )
 
-  platformLeft = createSprite(
-    150, 350, 300, 40
-  );
+  // platformLeft = createSprite(
+  //   150, 350, 300, 40
+  // );
 
-  platformRight = createSprite(
-    850, 500, 300, 40
-  );
+  // platformRight = createSprite(
+  //   850, 500, 300, 40
+  // );
 
-  death = createSprite(
-    500, 675, 1000, 75
-  );
-  death.visible = false
-  // death.addImage(fire)
+  // death = createSprite(
+  //   500, 675, 1000, 75
+  // );
+  // death.visible = false
+  // // death.addImage(fire)
 
-  deathPic = createSprite(
-    500, 675, 1000, 75
-  );
-  deathPic.addImage(fire)
+  // deathPic = createSprite(
+  //   500, 675, 1000, 75
+  // );
+  // deathPic.addImage(fire)
 
 
   player = createSprite(  // PLAYER ALWAYS LAST SO SHE'S ABOVE OTHERS
@@ -83,7 +83,7 @@ function level1Setup() {
   player.setCollider("rectangle", 0, 0, 50, 100)
 }
 
-function level1Draw() {
+function level2Draw() {
   clear()
   background(250, 250, 250, 100);
   drawSprites();
@@ -172,27 +172,32 @@ function level1Draw() {
     player.originalWidth = 100;
   }
 
-  if (player.overlap(coneUp) || player.overlap(coneUp2)) {
-    gravityDirection = 'up'
-  }
+////////////////////////////// THIS IS DIFFERENT IN EVERY LEVEL vv 
 
-  if (player.overlap(coneDown) || player.overlap(coneDown2)) {
-    gravityDirection = 'down'
-  }
+  // if (player.overlap(coneUp)) {
+  //   gravityDirection = 'up'
+  // }
 
+  // if (player.overlap(coneDown) || player.overlap(coneDown2)) {
+  //   gravityDirection = 'down'
+  // }
+
+  
+  // if (player.overlap(death)) {
+  //   player.position.x = 100;
+  //   player.position.y = 50;
+  //   gravityDirection = 'down'
+  //   gravitySpeedX = 0
+  //   gravitySpeedY = 0
+  //   die()
+  // }
+  ////////////////////////// DIFFERENT IN EVERY LEVEL ^^
   if (player.overlap(door)) {
-    winLevel()
+    level += 1
+    preload()
+    setup()
+    draw()
   }
-
-  if (player.overlap(death)) {
-    player.position.x = 100;
-    player.position.y = 50;
-    gravityDirection = 'down'
-    gravitySpeedX = 0
-    gravitySpeedY = 0
-    die()
-  }
-
   ////////////////////////////////////// BARRIER PHYSICS
 
   function hardFloor(sprite) {
@@ -250,7 +255,7 @@ function level1Draw() {
   hardFloor(floor)
   hardLeft(leftWall)
   hardRight(rightWall)
-  platform(platformLeft)
-  platform(platformRight)
+  // platform(platformLeft)
+  // platform(platformRight)
 
 } //////////////////////////////////////////////// CLOSE L1
