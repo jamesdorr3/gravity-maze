@@ -18,6 +18,16 @@ class GamesController < ApplicationController
         end
     end
 
+    def update
+        @game = Game.find(params["id"])
+        @game.update(game_params)
+        if @game.save
+            render json: @game, status: :created, location: @game
+        else
+            render json: @game.errors, status: :unprocessable_entity
+        end
+    end
+
     private
 
     def game_params
