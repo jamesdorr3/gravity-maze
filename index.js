@@ -37,7 +37,7 @@ let jumpRight = 0
 function preload() { ////////////////////////////////OPEN PRELOAD
   rest = loadImage(fetchURL + 'Fruits_Papaya_2D_Game_Asset/actions/rest/0001.png');
   // restU = loadImage(fetchURL + 'Fruits_Papaya_2D_Game_Asset/actions/rest/0001u.png');
-  // restL = loadImage(fetchURL + 'Fruits_Papaya_2D_Game_Asset/actions/rest/0001l.png');
+  restL = loadImage(fetchURL + 'Fruits_Papaya_2D_Game_Asset/actions/rest/0001l.png');
   // restR = loadImage(fetchURL + 'Fruits_Papaya_2D_Game_Asset/actions/rest/0001r.png');
   doorImg = loadImage('http://localhost:3000/moondoor.png')
   coneUpImg = loadImage(fetchURL + 'coneUp.png')
@@ -98,11 +98,10 @@ function setup() { //////////////////////////////// OPEN SETUP
 
     
   player = createSprite(  // PLAYER ALWAYS LAST SO SHE'S ABOVE OTHERS
-  50, 50, 50, 100);
+  50, 50, 30, 100);
   player.addImage(rest, 0, 0)
   player.setCollider("rectangle", 0, 0, 50, 100)
   } //////////////////////////////////////////////// CLOSE SETUP
-  
   
 function draw() { /////////////////////////////// START DRAW
   clear();
@@ -110,17 +109,27 @@ function draw() { /////////////////////////////// START DRAW
   drawSprites();
 
   if (keyIsDown(LEFT_ARROW)) {
-    player.mirrorX(-1)
+    if (gravityDirection === 'up' || gravityDirection === 'down') {
+      player.mirrorX(-1)
+    }
     player.position.x -= (5 + jumpLeft);
   }
   if(keyIsDown(RIGHT_ARROW)) {
-    player.mirrorX(1)
+    if (gravityDirection === 'up' || gravityDirection === 'down') {
+      player.mirrorX(1)
+    }
     player.position.x += (5 + jumpRight);
   }
   if (keyIsDown(DOWN_ARROW)) {
+    if (gravityDirection === 'left' || gravityDirection === 'right') {
+      player.mirrorY(1)
+    }
     player.position.y += (5 + jumpDown);
   }
   if (keyIsDown(UP_ARROW) || keyIsDown(SHIFT)) {
+    if (gravityDirection === 'left' || gravityDirection === 'right') {
+      player.mirrorY(-1)
+    }
     player.position.y -= (5 + jumpUp);
   }
 
@@ -131,6 +140,7 @@ function draw() { /////////////////////////////// START DRAW
   player.position.x += gravitySpeedX
   player.position.y += gravitySpeedY
   if (gravityDirection === 'down') {
+    player.addImage(rest)
     player.mirrorY(1)
     gravityY = 0.3;
     gravityX = 0;
@@ -139,8 +149,11 @@ function draw() { /////////////////////////////// START DRAW
     jumpUp = 4;
     jumpLeft = 0;
     jumpRight = 0;
+    player.originalHeight = 100;
+    player.originalWidth = 30;
   }
   else if (gravityDirection === 'up') {
+    player.addImage(rest)
     player.mirrorY(-1)
     gravityY = -0.3;
     gravityX = 0;
@@ -149,8 +162,12 @@ function draw() { /////////////////////////////// START DRAW
     jumpUp = 0;
     jumpLeft = 0;
     jumpRight = 0;
+    player.originalHeight = 100;
+    player.originalWidth = 30;
   }
   else if (gravityDirection === 'right') {
+    player.addImage(restL)
+    player.mirrorX(-1)
     gravityY = 0;
     gravityX = 0.3;
     gravitySpeedY = 0;
@@ -158,8 +175,12 @@ function draw() { /////////////////////////////// START DRAW
     jumpUp = 0;
     jumpLeft = 4;
     jumpRight = 0;
+    player.originalHeight = 30;
+    player.originalWidth = 100;
   }
   else if (gravityDirection === 'left') {
+    player.addImage(restL)
+    player.mirrorX(1)
     gravityY = 0;
     gravityX = -0.3;
     gravitySpeedY = 0;
@@ -167,6 +188,8 @@ function draw() { /////////////////////////////// START DRAW
     jumpUp = 0;
     jumpLeft = 0;
     jumpRight = 4;
+    player.originalHeight = 30;
+    player.originalWidth = 100;
   }
 
   if (player.overlap(coneUp)) {
@@ -196,45 +219,45 @@ function draw() { /////////////////////////////// START DRAW
 
   function hardFloor(sprite) {
     if ( // down
-      player.position.x + 15 > sprite.position.x - (sprite._internalWidth / 2) && 
-      player.position.x - 15 < sprite.position.x + (sprite._internalWidth / 2) && 
-      player.position.y + 50 >= sprite.position.y - (sprite._internalHeight /2) &&
-      player.position.y + 50 <= sprite.position.y
+      player.position.x + (player.originalWidth / 2) > sprite.position.x - (sprite._internalWidth / 2) && 
+      player.position.x - (player.originalWidth / 2) < sprite.position.x + (sprite._internalWidth / 2) && 
+      player.position.y + (player.originalHeight / 2) >= sprite.position.y - (sprite._internalHeight /2) &&
+      player.position.y + (player.originalHeight / 2) <= sprite.position.y
     ){
-      player.position.y = sprite.position.y - (sprite._internalHeight / 2) - 50;
+      player.position.y = sprite.position.y - (sprite._internalHeight / 2) - (player.originalHeight / 2);
       (gravityDirection === 'down') ? gravitySpeedY = 0 : 0;
     }
   }
   function hardRight(sprite) {
     if ( // left
-      player.position.y + 50 > sprite.position.y - (sprite._internalHeight / 2) &&
-      player.position.y - 50 < sprite.position.y + (sprite._internalHeight / 2) && 
-      player.position.x + 15 >= sprite.position.x - (sprite._internalWidth / 2) &&
-      player.position.x + 15 <= sprite.position.x
+      player.position.y + (player.originalHeight / 2) > sprite.position.y - (sprite._internalHeight / 2) &&
+      player.position.y - (player.originalHeight / 2) < sprite.position.y + (sprite._internalHeight / 2) && 
+      player.position.x + (player.originalWidth / 2) >= sprite.position.x - (sprite._internalWidth / 2) &&
+      player.position.x + (player.originalWidth / 2) <= sprite.position.x
       ){
-        player.position.x = sprite.position.x - (sprite._internalWidth / 2) - 15;
+        player.position.x = sprite.position.x - (sprite._internalWidth / 2) - (player.originalWidth / 2);
         (gravityDirection === 'right') ? gravitySpeedX = 0 : 0;
     }
   }
   function hardLeft(sprite) {
     if ( // right
-      player.position.y + 50 > sprite.position.y - (sprite._internalHeight / 2) &&
-      player.position.y - 50 < sprite.position.y + (sprite._internalHeight / 2) && 
-      player.position.x - 15 <= sprite.position.x + (sprite._internalWidth / 2) &&
-      player.position.x - 15 >= sprite.position.x
+      player.position.y + (player.originalHeight / 2) > sprite.position.y - (sprite._internalHeight / 2) &&
+      player.position.y - (player.originalHeight / 2) < sprite.position.y + (sprite._internalHeight / 2) && 
+      player.position.x - (player.originalWidth / 2) <= sprite.position.x + (sprite._internalWidth / 2) &&
+      player.position.x - (player.originalWidth / 2) >= sprite.position.x
       ){
-        player.position.x = sprite.position.x + (sprite._internalWidth / 2) + 15;
+        player.position.x = sprite.position.x + (sprite._internalWidth / 2) + (player.originalWidth / 2);
         (gravityDirection === 'left') ? gravitySpeedX = 0 : 0;
     }
   }
   function hardCeiling(sprite) {
     if ( // up
-      player.position.x + 15 > sprite.position.x - (sprite._internalWidth / 2) && 
-      player.position.x - 15 < sprite.position.x + (sprite._internalWidth / 2) && 
-      player.position.y - 50 <= sprite.position.y + (sprite._internalHeight /2) &&
-      player.position.y - 50 >= sprite.position.y //- (sprite._internalHeight /2)
+      player.position.x + (player.originalWidth / 2) > sprite.position.x - (sprite._internalWidth / 2) && 
+      player.position.x - (player.originalWidth / 2) < sprite.position.x + (sprite._internalWidth / 2) && 
+      player.position.y - (player.originalHeight / 2) <= sprite.position.y + (sprite._internalHeight /2) &&
+      player.position.y - (player.originalHeight / 2) >= sprite.position.y //- (sprite._internalHeight /2)
     ){
-      player.position.y = sprite.position.y + (sprite._internalHeight / 2) + 50;
+      player.position.y = sprite.position.y + (sprite._internalHeight / 2) + (player.originalHeight / 2);
       (gravityDirection === 'up') ? gravitySpeedY = 0 : 0;
     }
   }
@@ -337,9 +360,15 @@ function createGame(player_id) {
 ////////////////////////////////////////////// GAME FUNCTIONS
 
 function winLevel() {
-  setTimeout(function() {
     document.querySelector('body').innerHTML += `<h1> YOU WIN! </h1>`
-  }, 500)
+    document.querySelector('canvas').remove()
+    const gameId = document.querySelector('h2').dataset.gameId
+    fetch(fetchURL + `games/${gameId}`, {
+      method: 'PATCH',
+      headers: {'Content-Type': 'application/json',
+                Accept: 'application/json'},
+      body: JSON.stringify({score: 1})
+  })
 }
 
 function die() {
