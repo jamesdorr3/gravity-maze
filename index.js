@@ -14,8 +14,8 @@ class Player {
 Player.all = [];
 
 document.addEventListener('DOMContentLoaded', e => {
-  // login();
-  // makeLeaderboard()
+  login();
+  makeLeaderboard()
 })
 
 // ^^ JS SETUP ^^
@@ -23,27 +23,31 @@ document.addEventListener('DOMContentLoaded', e => {
 
 // GLOBAL VARIABLES
 
+let lives = 3
+
 let gravityDirection = 'down';
-// let x = 50;
-// let y = 650;
-let gravity = 0.3;
-
-
-let xSpeed = 0;
-let ySpeed = 0;
-let gravitySpeed = 0;
-let restL;
+let gravityX = 0;
+let gravitySpeedX = 0;
+let gravityY = 0.3;
+let gravitySpeedY = 0;
+let jumpUp = 4
+let jumpDown = 0
+let jumpLeft = 0
+let jumpRight = 0
 
 // REQUIRED FUNCTIONS
 
 
   function preload() { ////////////////////////////////OPEN PRELOAD
   rest = loadImage(fetchURL + 'Fruits_Papaya_2D_Game_Asset/actions/rest/0001.png');
-  // restU = loadImage(fetchURL + 'Fruits_Papaya_2D_Game_Asset/actions/rest/0001u.png');
   restL = loadImage(fetchURL + 'Fruits_Papaya_2D_Game_Asset/actions/rest/0001l.png');
+<<<<<<< HEAD
   restR = loadImage(fetchURL + 'Fruits_Papaya_2D_Game_Asset/actions/rest/0001r.png');
   restDown = loadImage(fetchURL + 'Fruits_Papaya_2D_Game_Asset/actions/rest/0001u.png');
   // restR = loadImage(fetchURL + 'Fruits_Papaya_2D_Game_Asset/actions/rest/0001r.png');
+=======
+  fire = loadImage(fetchURL + 'fire.png');
+>>>>>>> 3d59d963bdd21910d88478d02403381bd1682900
   doorImg = loadImage('http://localhost:3000/moondoor.png')
   coneUpImg = loadImage(fetchURL + 'coneUp.png')
   coneDownImg = loadImage(fetchURL + 'coneDown.png')
@@ -58,38 +62,64 @@ let restL;
   createCanvas(1000, 700);
 
   door = createSprite(
-    940, 605, 50, 85);
+    940, 400, 50, 85);
   door.addImage(doorImg, 0, 0)
   door.scale = .4
 
   coneUp = createSprite(
-    500, 630, 10, 70);
+    275, 500, 10, 70);
   coneUp.addImage(coneUpImg, 0, 0)
 
   coneDown = createSprite(
-    1000, 70, 1, 70);
+    950, 70, 1, 70);
   coneDown.addImage(coneDownImg, 0, 0)
 
-  coneLeft = createSprite(
-    930, 300, 1, 70);
-  coneLeft.addImage(coneLeftImg, 0, 0)
+  coneUp2 = createSprite(
+    20, 250, 1, 70);
+  coneUp2.addImage(coneUpImg, 0, 0)
 
-  coneRight = createSprite(
-    70, 350, 1, 70);
-  coneRight.addImage(coneRightImg, 0, 0)
+  coneDown2 = createSprite(
+    250, 50, 1, 70);
+  coneDown2.addImage(coneDownImg, 0, 0)
 
-  wall = createSprite(
-    650, 300, 10, 100
+  ceiling = createSprite(
+    500, -50, 1100, 100
+  )
+  floor = createSprite(
+    500, 750, 1100, 100
+  )
+  leftWall = createSprite(
+    -50, 350, 100, 1100
+  )
+  rightWall = createSprite(
+    1050, 350, 100, 1100
+  )
+
+  platformLeft = createSprite(
+    150, 350, 300, 40
   );
 
-  wall2 = createSprite(
-    650, 25, 10, 50
+  platformRight = createSprite(
+    850, 500, 300, 40
   );
 
+  death = createSprite(
+    500, 675, 1000, 75
+  );
+  death.visible = false
+  // death.addImage(fire)
+
+  deathPic = createSprite(
+    500, 675, 1000, 75
+  );
+  deathPic.addImage(fire)
+
+    
   player = createSprite(  // PLAYER ALWAYS LAST SO SHE'S ABOVE OTHERS
-    50, 600, 50, 100);
+  100, 50, 30, 100);
   player.addImage(rest, 0, 0)
   player.setCollider("rectangle", 0, 0, 50, 100)
+<<<<<<< HEAD
 
   // create a sprite for every angle of the player. Every interaction with a cone. left cone with left player
 
@@ -240,20 +270,183 @@ let restL;
 }//////////////////////////////////////////////// CLOSE DRAW
 
 
+=======
+  } //////////////////////////////////////////////// CLOSE SETUP
+  
+function draw() { /////////////////////////////// START DRAW
+  clear();
+  background(250, 250, 250, 100);
+  drawSprites();
 
-// function keyPressed() {
-//   if (keyCode === (UP_ARROW)) {
-//     y = y - 50;
-//   } else if (keyCode === DOWN_ARROW) {
-//    y = y + 50;
-//   }
-//   if (keyCode === LEFT_ARROW) {
-//     x = x - 50;
-//   } else if (keyCode === RIGHT_ARROW) {
-//     x = x + 50;
-//   }
+  if (keyIsDown(LEFT_ARROW)) {
+    if (gravityDirection === 'up' || gravityDirection === 'down') {
+      player.mirrorX(-1)
+    }
+    player.position.x -= (5 + jumpLeft);
+  }
+  if(keyIsDown(RIGHT_ARROW)) {
+    if (gravityDirection === 'up' || gravityDirection === 'down') {
+      player.mirrorX(1)
+    }
+    player.position.x += (5 + jumpRight);
+  }
+  if (keyIsDown(DOWN_ARROW)) {
+    if (gravityDirection === 'left' || gravityDirection === 'right') {
+      player.mirrorY(1)
+    }
+    player.position.y += (5 + jumpDown);
+  }
+  if (keyIsDown(UP_ARROW) || keyIsDown(SHIFT)) {
+    if (gravityDirection === 'left' || gravityDirection === 'right') {
+      player.mirrorY(-1)
+    }
+    player.position.y -= (5 + jumpUp);
+  }
 
-// }
+
+  //////////////////////////////////////// Gravity
+  gravitySpeedX += gravityX
+  gravitySpeedY += gravityY
+  player.position.x += gravitySpeedX
+  player.position.y += gravitySpeedY
+  if (gravityDirection === 'down') {
+    player.addImage(rest)
+    player.mirrorY(1)
+    gravityY = 0.3;
+    gravityX = 0;
+    gravitySpeedX = 0;
+    jumpDown = 0;
+    jumpUp = 4;
+    jumpLeft = 0;
+    jumpRight = 0;
+    player.originalHeight = 100;
+    player.originalWidth = 30;
+  }
+  else if (gravityDirection === 'up') {
+    player.addImage(rest)
+    player.mirrorY(-1)
+    gravityY = -0.3;
+    gravityX = 0;
+    gravitySpeedX = 0;
+    jumpDown = 4;
+    jumpUp = 0;
+    jumpLeft = 0;
+    jumpRight = 0;
+    player.originalHeight = 100;
+    player.originalWidth = 30;
+  }
+  else if (gravityDirection === 'right') {
+    player.addImage(restL)
+    player.mirrorX(-1)
+    gravityY = 0;
+    gravityX = 0.3;
+    gravitySpeedY = 0;
+    jumpDown = 0;
+    jumpUp = 0;
+    jumpLeft = 4;
+    jumpRight = 0;
+    player.originalHeight = 30;
+    player.originalWidth = 100;
+  }
+  else if (gravityDirection === 'left') {
+    player.addImage(restL)
+    player.mirrorX(1)
+    gravityY = 0;
+    gravityX = -0.3;
+    gravitySpeedY = 0;
+    jumpDown = 0;
+    jumpUp = 0;
+    jumpLeft = 0;
+    jumpRight = 4;
+    player.originalHeight = 30;
+    player.originalWidth = 100;
+  }
+
+  if (player.overlap(coneUp) || player.overlap(coneUp2)) {
+    gravityDirection = 'up'
+  }
+
+  if (player.overlap(coneDown) || player.overlap(coneDown2)) {
+    gravityDirection = 'down'
+  }
+
+  if (player.overlap(door)) {
+    winLevel()
+  }
+
+  if (player.overlap(death)) {
+    player.position.x = 100;
+    player.position.y = 50;
+    gravityDirection = 'down'
+    gravitySpeedX = 0
+    gravitySpeedY = 0
+    die()
+  }
+
+  ////////////////////////////////////// BARRIER PHYSICS
+
+  function hardFloor(sprite) {
+    if ( // down
+      player.position.x + (player.originalWidth / 2) > sprite.position.x - (sprite._internalWidth / 2) && 
+      player.position.x - (player.originalWidth / 2) < sprite.position.x + (sprite._internalWidth / 2) && 
+      player.position.y + (player.originalHeight / 2) >= sprite.position.y - (sprite._internalHeight /2) &&
+      player.position.y + (player.originalHeight / 2) <= sprite.position.y
+    ){
+      player.position.y = sprite.position.y - (sprite._internalHeight / 2) - (player.originalHeight / 2);
+      (gravityDirection === 'down') ? gravitySpeedY = 0 : 0;
+    }
+  }
+  function hardRight(sprite) {
+    if ( // left
+      player.position.y + (player.originalHeight / 2) > sprite.position.y - (sprite._internalHeight / 2) &&
+      player.position.y - (player.originalHeight / 2) < sprite.position.y + (sprite._internalHeight / 2) && 
+      player.position.x + (player.originalWidth / 2) >= sprite.position.x - (sprite._internalWidth / 2) &&
+      player.position.x + (player.originalWidth / 2) <= sprite.position.x
+      ){
+        player.position.x = sprite.position.x - (sprite._internalWidth / 2) - (player.originalWidth / 2);
+        (gravityDirection === 'right') ? gravitySpeedX = 0 : 0;
+    }
+  }
+  function hardLeft(sprite) {
+    if ( // right
+      player.position.y + (player.originalHeight / 2) > sprite.position.y - (sprite._internalHeight / 2) &&
+      player.position.y - (player.originalHeight / 2) < sprite.position.y + (sprite._internalHeight / 2) && 
+      player.position.x - (player.originalWidth / 2) <= sprite.position.x + (sprite._internalWidth / 2) &&
+      player.position.x - (player.originalWidth / 2) >= sprite.position.x
+      ){
+        player.position.x = sprite.position.x + (sprite._internalWidth / 2) + (player.originalWidth / 2);
+        (gravityDirection === 'left') ? gravitySpeedX = 0 : 0;
+    }
+  }
+  function hardCeiling(sprite) {
+    if ( // up
+      player.position.x + (player.originalWidth / 2) > sprite.position.x - (sprite._internalWidth / 2) && 
+      player.position.x - (player.originalWidth / 2) < sprite.position.x + (sprite._internalWidth / 2) && 
+      player.position.y - (player.originalHeight / 2) <= sprite.position.y + (sprite._internalHeight /2) &&
+      player.position.y - (player.originalHeight / 2) >= sprite.position.y //- (sprite._internalHeight /2)
+    ){
+      player.position.y = sprite.position.y + (sprite._internalHeight / 2) + (player.originalHeight / 2);
+      (gravityDirection === 'up') ? gravitySpeedY = 0 : 0;
+    }
+  }
+  function platform(sprite) {
+    hardCeiling(sprite)
+    hardFloor(sprite)
+    hardLeft(sprite)
+    hardRight(sprite)
+  }
+
+  hardCeiling(ceiling)
+  hardFloor(floor)
+  hardLeft(leftWall)
+  hardRight(rightWall)
+  platform(platformLeft)
+  platform(platformRight)
+>>>>>>> 3d59d963bdd21910d88478d02403381bd1682900
+
+} //////////////////////////////////////////////// CLOSE DRAW
+
+//////////////////////////////////////////////// START FUNCTIONS
 
 function makeLeaderboard() {
   fetch(fetchURL + 'highscores')
@@ -289,9 +482,10 @@ function submitListener() {
     findOrCreatePlayer(name);
     document.getElementById('login').remove();
     document.querySelector('.leaderboard h2').innerText = name;
+    document.querySelector('h1').innerHTML = `Level 01 x 01 <br/> Lives: ${lives}`
     setTimeout(function() {
       document.querySelector('h1').style.display = 'none'
-    }, 3000)
+    }, 300)
   })
 }
 
@@ -330,4 +524,32 @@ function createGame(player_id) {
   })
   .then(r => r.json())
   .then(game => document.querySelector('.leaderboard h2').dataset.gameId = game.id)
+}
+
+////////////////////////////////////////////// GAME FUNCTIONS
+
+function winLevel() {
+    document.querySelector('body').innerHTML += `<h1> YOU WIN! </h1>`
+    document.querySelector('canvas').remove()
+    const gameId = document.querySelector('h2').dataset.gameId
+    fetch(fetchURL + `games/${gameId}`, {
+      method: 'PATCH',
+      headers: {'Content-Type': 'application/json',
+                Accept: 'application/json'},
+      body: JSON.stringify({score: 1})
+  })
+}
+
+function die() {
+  lives -= 1
+  if (lives >= 0) {
+    document.querySelector('h1').innerHTML = `Level 01 x 01 <br/> Lives: ${lives}`
+    document.querySelector('h1').style.display = 'inline'
+    setTimeout(function() {
+      document.querySelector('h1').style.display = 'none'
+    }, 1000)
+  }else{
+    document.querySelector('h1').innerHTML = `YOU LOSE`
+    document.querySelector('h1').style.display = 'inline'
+  }
 }

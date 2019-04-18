@@ -1,5 +1,10 @@
 html {
+<<<<<<< HEAD
      background-image: url('public/background/starbg.jpg');
+=======
+     /* background-image: url('public/background/sparksky.gif'); */
+     background-color: lightgray;
+>>>>>>> 3d59d963bdd21910d88478d02403381bd1682900
      background-size: 900px 900px
 }
 
