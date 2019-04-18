@@ -36,9 +36,8 @@ let jumpRight = 0
 
 function preload() { ////////////////////////////////OPEN PRELOAD
   rest = loadImage(fetchURL + 'Fruits_Papaya_2D_Game_Asset/actions/rest/0001.png');
-  // restU = loadImage(fetchURL + 'Fruits_Papaya_2D_Game_Asset/actions/rest/0001u.png');
   restL = loadImage(fetchURL + 'Fruits_Papaya_2D_Game_Asset/actions/rest/0001l.png');
-  // restR = loadImage(fetchURL + 'Fruits_Papaya_2D_Game_Asset/actions/rest/0001r.png');
+  fire = loadImage(fetchURL + 'fire.png');
   doorImg = loadImage('http://localhost:3000/moondoor.png')
   coneUpImg = loadImage(fetchURL + 'coneUp.png')
   coneDownImg = loadImage(fetchURL + 'coneDown.png')
@@ -56,20 +55,20 @@ function setup() { //////////////////////////////// OPEN SETUP
   door.scale = .4
 
   coneUp = createSprite(
-    275, 550, 10, 70);
+    275, 500, 10, 70);
   coneUp.addImage(coneUpImg, 0, 0)
 
   coneDown = createSprite(
     950, 70, 1, 70);
   coneDown.addImage(coneDownImg, 0, 0)
 
-  // coneLeft = createSprite(
-  //   930, 300, 1, 70);
-  // coneLeft.addImage(coneLeftImg, 0, 0)
+  coneUp2 = createSprite(
+    20, 250, 1, 70);
+  coneUp2.addImage(coneUpImg, 0, 0)
 
-  // coneRight = createSprite(
-  //   70, 350, 1, 70);
-  // coneRight.addImage(coneRightImg, 0, 0)
+  coneDown2 = createSprite(
+    250, 50, 1, 70);
+  coneDown2.addImage(coneDownImg, 0, 0)
 
   ceiling = createSprite(
     500, -50, 1100, 100
@@ -85,7 +84,7 @@ function setup() { //////////////////////////////// OPEN SETUP
   )
 
   platformLeft = createSprite(
-    150, 375, 300, 40
+    150, 350, 300, 40
   );
 
   platformRight = createSprite(
@@ -93,12 +92,19 @@ function setup() { //////////////////////////////// OPEN SETUP
   );
 
   death = createSprite(
-    500, 675, 1000, 50
+    500, 675, 1000, 75
   );
+  death.visible = false
+  // death.addImage(fire)
+
+  deathPic = createSprite(
+    500, 675, 1000, 75
+  );
+  deathPic.addImage(fire)
 
     
   player = createSprite(  // PLAYER ALWAYS LAST SO SHE'S ABOVE OTHERS
-  50, 50, 30, 100);
+  100, 50, 30, 100);
   player.addImage(rest, 0, 0)
   player.setCollider("rectangle", 0, 0, 50, 100)
   } //////////////////////////////////////////////// CLOSE SETUP
@@ -192,11 +198,11 @@ function draw() { /////////////////////////////// START DRAW
     player.originalWidth = 100;
   }
 
-  if (player.overlap(coneUp)) {
+  if (player.overlap(coneUp) || player.overlap(coneUp2)) {
     gravityDirection = 'up'
   }
 
-  if (player.overlap(coneDown)) {
+  if (player.overlap(coneDown) || player.overlap(coneDown2)) {
     gravityDirection = 'down'
   }
 
@@ -205,9 +211,7 @@ function draw() { /////////////////////////////// START DRAW
   }
 
   if (player.overlap(death)) {
-    player.position.x = 50;
-    player.position.y = 50;
-    player.position.x = 50;
+    player.position.x = 100;
     player.position.y = 50;
     gravityDirection = 'down'
     gravitySpeedX = 0
