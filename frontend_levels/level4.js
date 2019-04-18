@@ -17,6 +17,7 @@ function level1Preload() {
   coneLeftImg = loadImage(fetchURL + 'coneLeft.png')
   coneRightImg = loadImage(fetchURL + 'coneRight.png')
 }
+
 function level1Setup() {
 
   createCanvas(1000, 700);
@@ -181,7 +182,10 @@ function level1Draw() {
   }
 
   if (player.overlap(door)) {
-    winLevel()
+    level += 1
+    preload()
+    setup()
+    draw()
   }
 
   if (player.overlap(death)) {

@@ -17,12 +17,13 @@ function level1Preload() {
   coneLeftImg = loadImage(fetchURL + 'coneLeft.png')
   coneRightImg = loadImage(fetchURL + 'coneRight.png')
 }
+
 function level1Setup() {
 
   createCanvas(1000, 700);
 
   door = createSprite(
-    940, 400, 50, 85);
+    940, 385, 50, 85);
   door.addImage(doorImg, 0, 0)
   door.scale = .4
 
@@ -181,7 +182,10 @@ function level1Draw() {
   }
 
   if (player.overlap(door)) {
-    winLevel()
+    level += 1
+    preload()
+    setup()
+    draw()
   }
 
   if (player.overlap(death)) {
