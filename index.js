@@ -36,6 +36,9 @@ let jumpRight = 0
 
 function preload() { ////////////////////////////////OPEN PRELOAD
   rest = loadImage(fetchURL + 'Fruits_Papaya_2D_Game_Asset/actions/rest/0001.png');
+  walkAnim = loadAnimation( `/Fruits_Papaya_2D_Game_Asset/actions/run/0001.png`,
+  `/Fruits_Papaya_2D_Game_Asset/actions/run/0029.png`
+  )
   restL = loadImage(fetchURL + 'Fruits_Papaya_2D_Game_Asset/actions/rest/0001l.png');
   fire = loadImage(fetchURL + 'fire.png');
   doorImg = loadImage('http://localhost:3000/moondoor.png')
@@ -106,6 +109,8 @@ function setup() { //////////////////////////////// OPEN SETUP
   player = createSprite(  // PLAYER ALWAYS LAST SO SHE'S ABOVE OTHERS
   100, 50, 30, 100);
   player.addImage(rest, 0, 0)
+  // player.addAnimation('walk', walkAnim)
+  // player.changeAnimation('walk')
   player.setCollider("rectangle", 0, 0, 50, 100)
   } //////////////////////////////////////////////// CLOSE SETUP
   
