@@ -11,14 +11,16 @@ class Player {
 Player.all = [];
 
 document.addEventListener('DOMContentLoaded', e => {
-  // login();
-  // makeLeaderboard()
+  login();
+  makeLeaderboard()
 })
 
 // ^^ JS SETUP ^^
 // vv GAME MECHANICS vv
 
 // GLOBAL VARIABLES
+
+let lives = 3
 
 let gravityDirection = 'down';
 let gravityX = 0;
@@ -54,7 +56,7 @@ function setup() { //////////////////////////////// OPEN SETUP
   door.scale = .4
 
   coneUp = createSprite(
-    325, 600, 10, 70);
+    275, 550, 10, 70);
   coneUp.addImage(coneUpImg, 0, 0)
 
   coneDown = createSprite(
@@ -83,11 +85,11 @@ function setup() { //////////////////////////////// OPEN SETUP
   )
 
   platformLeft = createSprite(
-    150, 500, 300, 20
+    150, 375, 300, 40
   );
 
   platformRight = createSprite(
-    850, 500, 300, 20
+    850, 500, 300, 40
   );
 
   death = createSprite(
@@ -175,8 +177,19 @@ function draw() { /////////////////////////////// START DRAW
     gravityDirection = 'down'
   }
 
+  if (player.overlap(door)) {
+    winLevel()
+  }
+
   if (player.overlap(death)) {
-    console.log('YOU DIED! GTFO!')
+    player.position.x = 50;
+    player.position.y = 50;
+    player.position.x = 50;
+    player.position.y = 50;
+    gravityDirection = 'down'
+    gravitySpeedX = 0
+    gravitySpeedY = 0
+    die()
   }
 
   ////////////////////////////////////// BARRIER PHYSICS
@@ -241,6 +254,8 @@ function draw() { /////////////////////////////// START DRAW
 
 } //////////////////////////////////////////////// CLOSE DRAW
 
+//////////////////////////////////////////////// START FUNCTIONS
+
 function makeLeaderboard() {
   fetch(fetchURL + 'highscores')
   .then(r => r.json())
@@ -275,9 +290,10 @@ function submitListener() {
     findOrCreatePlayer(name);
     document.getElementById('login').remove();
     document.querySelector('.leaderboard h2').innerText = name;
+    document.querySelector('h1').innerHTML = `Level 01 x 01 <br/> Lives: ${lives}`
     setTimeout(function() {
       document.querySelector('h1').style.display = 'none'
-    }, 3000)
+    }, 300)
   })
 }
 
@@ -316,4 +332,26 @@ function createGame(player_id) {
   })
   .then(r => r.json())
   .then(game => document.querySelector('.leaderboard h2').dataset.gameId = game.id)
+}
+
+////////////////////////////////////////////// GAME FUNCTIONS
+
+function winLevel() {
+  setTimeout(function() {
+    document.querySelector('body').innerHTML += `<h1> YOU WIN! </h1>`
+  }, 500)
+}
+
+function die() {
+  lives -= 1
+  if (lives >= 0) {
+    document.querySelector('h1').innerHTML = `Level 01 x 01 <br/> Lives: ${lives}`
+    document.querySelector('h1').style.display = 'inline'
+    setTimeout(function() {
+      document.querySelector('h1').style.display = 'none'
+    }, 1000)
+  }else{
+    document.querySelector('h1').innerHTML = `YOU LOSE`
+    document.querySelector('h1').style.display = 'inline'
+  }
 }
