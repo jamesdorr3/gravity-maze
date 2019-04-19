@@ -43,19 +43,6 @@ function level1Setup() {
     250, 50, 1, 70);
   coneDown2.addImage(coneDownImg, 0, 0)
 
-  ceiling = createSprite(
-    500, -50, 1100, 100
-  )
-  floor = createSprite(
-    500, 750, 1100, 100
-  )
-  leftWall = createSprite(
-    -50, 350, 100, 1100
-  )
-  rightWall = createSprite(
-    1050, 350, 100, 1100
-  )
-
   platformLeft = createSprite(
     150, 350, 300, 40
   );
@@ -85,93 +72,6 @@ function level1Setup() {
 }
 
 function level1Draw() {
-  clear()
-  background(250, 250, 250, 100);
-  drawSprites();
-
-  if (keyIsDown(LEFT_ARROW)) {
-    if (gravityDirection === 'up' || gravityDirection === 'down') {
-      player.mirrorX(-1)
-    }
-    player.position.x -= (5 + jumpLeft);
-  }
-  if(keyIsDown(RIGHT_ARROW)) {
-    if (gravityDirection === 'up' || gravityDirection === 'down') {
-      player.mirrorX(1)
-    }
-    player.position.x += (5 + jumpRight);
-  }
-  if (keyIsDown(DOWN_ARROW)) {
-    if (gravityDirection === 'left' || gravityDirection === 'right') {
-      player.mirrorY(1)
-    }
-    player.position.y += (5 + jumpDown);
-  }
-  if (keyIsDown(UP_ARROW) || keyIsDown(SHIFT)) {
-    if (gravityDirection === 'left' || gravityDirection === 'right') {
-      player.mirrorY(-1)
-    }
-    player.position.y -= (5 + jumpUp);
-  }
-
-
-  //////////////////////////////////////// Gravity
-  gravitySpeedX += gravityX
-  gravitySpeedY += gravityY
-  player.position.x += gravitySpeedX
-  player.position.y += gravitySpeedY
-  if (gravityDirection === 'down') {
-    player.addImage(rest)
-    player.mirrorY(1)
-    gravityY = 0.3;
-    gravityX = 0;
-    gravitySpeedX = 0;
-    jumpDown = 0;
-    jumpUp = 4;
-    jumpLeft = 0;
-    jumpRight = 0;
-    player.originalHeight = 100;
-    player.originalWidth = 30;
-  }
-  else if (gravityDirection === 'up') {
-    player.addImage(rest)
-    player.mirrorY(-1)
-    gravityY = -0.3;
-    gravityX = 0;
-    gravitySpeedX = 0;
-    jumpDown = 4;
-    jumpUp = 0;
-    jumpLeft = 0;
-    jumpRight = 0;
-    player.originalHeight = 100;
-    player.originalWidth = 30;
-  }
-  else if (gravityDirection === 'right') {
-    player.addImage(restL)
-    player.mirrorX(-1)
-    gravityY = 0;
-    gravityX = 0.3;
-    gravitySpeedY = 0;
-    jumpDown = 0;
-    jumpUp = 0;
-    jumpLeft = 4;
-    jumpRight = 0;
-    player.originalHeight = 30;
-    player.originalWidth = 100;
-  }
-  else if (gravityDirection === 'left') {
-    player.addImage(restL)
-    player.mirrorX(1)
-    gravityY = 0;
-    gravityX = -0.3;
-    gravitySpeedY = 0;
-    jumpDown = 0;
-    jumpUp = 0;
-    jumpLeft = 0;
-    jumpRight = 4;
-    player.originalHeight = 30;
-    player.originalWidth = 100;
-  }
 
   if (player.overlap(coneUp) || player.overlap(coneUp2)) {
     gravityDirection = 'up'
@@ -179,13 +79,6 @@ function level1Draw() {
 
   if (player.overlap(coneDown) || player.overlap(coneDown2)) {
     gravityDirection = 'down'
-  }
-
-  if (player.overlap(door)) {
-    level += 1
-    preload()
-    setup()
-    draw()
   }
 
   if (player.overlap(death)) {
@@ -198,57 +91,6 @@ function level1Draw() {
   }
 
   ////////////////////////////////////// BARRIER PHYSICS
-
-  function hardFloor(sprite) {
-    if ( // down
-      player.position.x + (player.originalWidth / 2) > sprite.position.x - (sprite._internalWidth / 2) &&
-      player.position.x - (player.originalWidth / 2) < sprite.position.x + (sprite._internalWidth / 2) &&
-      player.position.y + (player.originalHeight / 2) >= sprite.position.y - (sprite._internalHeight /2) &&
-      player.position.y + (player.originalHeight / 2) <= sprite.position.y
-    ){
-      player.position.y = sprite.position.y - (sprite._internalHeight / 2) - (player.originalHeight / 2);
-      (gravityDirection === 'down') ? gravitySpeedY = 0 : 0;
-    }
-  }
-  function hardRight(sprite) {
-    if ( // left
-      player.position.y + (player.originalHeight / 2) > sprite.position.y - (sprite._internalHeight / 2) &&
-      player.position.y - (player.originalHeight / 2) < sprite.position.y + (sprite._internalHeight / 2) &&
-      player.position.x + (player.originalWidth / 2) >= sprite.position.x - (sprite._internalWidth / 2) &&
-      player.position.x + (player.originalWidth / 2) <= sprite.position.x
-      ){
-        player.position.x = sprite.position.x - (sprite._internalWidth / 2) - (player.originalWidth / 2);
-        (gravityDirection === 'right') ? gravitySpeedX = 0 : 0;
-    }
-  }
-  function hardLeft(sprite) {
-    if ( // right
-      player.position.y + (player.originalHeight / 2) > sprite.position.y - (sprite._internalHeight / 2) &&
-      player.position.y - (player.originalHeight / 2) < sprite.position.y + (sprite._internalHeight / 2) &&
-      player.position.x - (player.originalWidth / 2) <= sprite.position.x + (sprite._internalWidth / 2) &&
-      player.position.x - (player.originalWidth / 2) >= sprite.position.x
-      ){
-        player.position.x = sprite.position.x + (sprite._internalWidth / 2) + (player.originalWidth / 2);
-        (gravityDirection === 'left') ? gravitySpeedX = 0 : 0;
-    }
-  }
-  function hardCeiling(sprite) {
-    if ( // up
-      player.position.x + (player.originalWidth / 2) > sprite.position.x - (sprite._internalWidth / 2) &&
-      player.position.x - (player.originalWidth / 2) < sprite.position.x + (sprite._internalWidth / 2) &&
-      player.position.y - (player.originalHeight / 2) <= sprite.position.y + (sprite._internalHeight /2) &&
-      player.position.y - (player.originalHeight / 2) >= sprite.position.y //- (sprite._internalHeight /2)
-    ){
-      player.position.y = sprite.position.y + (sprite._internalHeight / 2) + (player.originalHeight / 2);
-      (gravityDirection === 'up') ? gravitySpeedY = 0 : 0;
-    }
-  }
-  function platform(sprite) {
-    hardCeiling(sprite)
-    hardFloor(sprite)
-    hardLeft(sprite)
-    hardRight(sprite)
-  }
 
   hardCeiling(ceiling)
   hardFloor(floor)
