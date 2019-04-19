@@ -18,7 +18,7 @@ function level3Setup() {
   )
 
   platform4 = createSprite(
-    760, 225, 220, 50
+    760, 230, 220, 40
   )
 
   platform5 = createSprite(
@@ -61,6 +61,7 @@ function level3Setup() {
     775, 215, 0, 0
   )
   coneRight.addImage(coneRightImg)
+  coneRight.setCollider('circle', 0, 0, 20)
 
   coneRight2 = createSprite(
     25, 125, 0, 0
