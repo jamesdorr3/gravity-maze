@@ -48,23 +48,6 @@ function preload() { ////////////////////////////////OPEN PRELOAD
   coneDownImg = loadImage(fetchURL + 'coneDown.png')
   coneLeftImg = loadImage(fetchURL + 'coneLeft.png')
   coneRightImg = loadImage(fetchURL + 'coneRight.png')
-  switch (level) {
-    case 0:
-      level0Preload()
-      break
-    case 1:
-      level1Preload()
-      break
-    case 2:
-      level2Preload()
-      break
-    case 3:
-      level3Preload()
-      break
-    case 4:
-      level4Preload()
-      break
-  }
 } ////////////////////////////////////////////////// CLOSE PRELOAD
 
 
@@ -239,7 +222,7 @@ function draw() { /////////////////////////////// START DRAW
 
   if (player.overlap(door)) {
     level += 1
-    preload()
+    gravityDirection = 'down'
     setup()
     draw()
   }

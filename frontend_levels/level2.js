@@ -1,23 +1,3 @@
-function level2Preload() {
-  rest = loadImage(fetchURL + 'Fruits_Papaya_2D_Game_Asset/actions/rest/0001.png');
-  walkAnim = loadAnimation( `/Fruits_Papaya_2D_Game_Asset/actions/run/0001.png`,
-  `/Fruits_Papaya_2D_Game_Asset/actions/run/0029.png`
-  )
-  restL = loadImage(fetchURL + 'Fruits_Papaya_2D_Game_Asset/actions/rest/0001l.png');
-
-  restR = loadImage(fetchURL + 'Fruits_Papaya_2D_Game_Asset/actions/rest/0001r.png');
-  restDown = loadImage(fetchURL + 'Fruits_Papaya_2D_Game_Asset/actions/rest/0001u.png');
-  // restR = loadImage(fetchURL + 'Fruits_Papaya_2D_Game_Asset/actions/rest/0001r.png');
-
-  fire = loadImage(fetchURL + 'fire.png');
-
-  doorImg = loadImage('http://localhost:3000/moondoor.png')
-  coneUpImg = loadImage(fetchURL + 'coneUp.png')
-  coneDownImg = loadImage(fetchURL + 'coneDown.png')
-  coneLeftImg = loadImage(fetchURL + 'coneLeft.png')
-  coneRightImg = loadImage(fetchURL + 'coneRight.png')
-}
-
 function level2Setup() {
   createCanvas(1000, 700);
 
