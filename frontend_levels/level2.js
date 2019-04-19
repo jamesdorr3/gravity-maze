@@ -23,7 +23,7 @@ function level2Setup() {
   coneUp2.addImage(coneUpImg, 0, 0)
 
   coneLeft = createSprite(
-    920, 570, 1, 70);
+    920, 530, 1, 70);
   coneLeft.addImage(coneLeftImg, 0, 0)
 
   coneRight = createSprite(
@@ -40,17 +40,17 @@ function level2Setup() {
   );
 
   platformRight = createSprite(
-    950, 500, 300, 40
+    950, 400, 300, 40
   );
 
   death = createSprite(
-    350, 775, 1000, 75
+    350, 700, 1000, 75
   );
   death.visible = false
   death.addImage(fire)
 
   deathPic = createSprite(
-    350, 675, 1000, 75
+    350, 700, 1000, 75
   );
   deathPic.addImage(fire)
 
