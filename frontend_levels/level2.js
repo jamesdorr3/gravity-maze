@@ -64,13 +64,13 @@ function level2Setup() {
   );
 
   death = createSprite(
-    350, 690, 1000, 75
+    350, 700, 1000, 75
   );
   death.visible = false
   death.addImage(fire)
 
   deathPic = createSprite(
-    350, 690, 1000, 75
+    350, 700, 1000, 75
   );
   deathPic.addImage(fire)
 
