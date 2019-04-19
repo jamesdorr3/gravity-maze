@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', e => {
 
 // GLOBAL VARIABLES
 
-let lives = 3
+let lives = 4
 let level = 0
 
 let gravityDirection = 'down';
@@ -127,6 +127,18 @@ function setup() { //////////////////////////////// OPEN SETUP
       coneRight2.remove()
       death.remove()
       level4Setup()
+      break
+    case 5:
+      player.remove()
+      door.remove()
+      platform1.remove()
+      platform2.remove()
+      platform3.remove()
+      platform4.remove()
+      platform5.remove()
+      platform6.remove()
+      platform7.remove()
+      level5Setup()
       break
   }
 } //////////////////////////////////////////////// CLOSE SETUP
@@ -248,6 +260,9 @@ function draw() { /////////////////////////////// START DRAW
       break
     case 4:
       level4Draw()
+      break
+    case 5:
+      level5Draw()
       break
   }
   
@@ -401,7 +416,7 @@ function winLevel() {
 
 function die() {
   lives -= 1
-  if (lives >= 0) {
+  if (lives > 0) {
     document.querySelector('h1').innerHTML = `Level 01 x 01 <br/> Lives: ${lives}`
     document.querySelector('h1').style.display = 'inline'
     setTimeout(function() {

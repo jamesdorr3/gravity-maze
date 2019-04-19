@@ -48,7 +48,7 @@ function level1Setup() {
   player.addImage(rest, 0, 0)
   // player.addAnimation('walk', walkAnim)
   // player.changeAnimation('walk')
-  player.setCollider("rectangle", 0, 0, 50, 100)
+  player.setCollider("rectangle", 0, 0, 30, 100)
 }
 
 function level1Draw() {

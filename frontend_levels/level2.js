@@ -5,6 +5,7 @@ function level2Setup() {
     900, 300, 50, 85);
   door.addImage(doorImg, 0, 0)
   door.scale = .4
+  door.setCollider('rectangle', 0, 0, 50, 100)
 
   coneDown = createSprite(
     750, 250, 10, 70);
@@ -56,7 +57,7 @@ function level2Setup() {
 
 
   player = createSprite(  // PLAYER ALWAYS LAST SO SHE'S ABOVE OTHERS
-  100, 50, 30, 100);
+  50, 300, 30, 100);
   player.addImage(rest, 0, 0)
   // player.addAnimation('walk', walkAnim)
   // player.changeAnimation('walk')
@@ -82,8 +83,8 @@ function level2Draw() {
   }
 
   if (player.overlap(death)) {
-    player.position.x = 100;
-    player.position.y = 50;
+    player.position.x = 50;
+    player.position.y = 300;
     gravityDirection = 'down'
     gravitySpeedX = 0
     gravitySpeedY = 0
