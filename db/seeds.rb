@@ -8,9 +8,7 @@
 Game.destroy_all
 Player.destroy_all
 
-sharon = Player.create(name: 'Sharon')
-james = Player.create(name: 'James')
-Game.create(player: sharon, score: 3)
-Game.create(player: james, score: 2)
-Game.create(player: sharon, score: 1)
-Game.create(player: sharon, score: 4)
+# sharon = Player.create(name: 'Sharon')
+# james = Player.create(name: 'James')
+# Game.create(player: sharon, score: 0)
+# Game.create(player: james, score: 0)
