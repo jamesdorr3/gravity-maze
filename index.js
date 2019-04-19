@@ -89,6 +89,12 @@ function setup() { //////////////////////////////// OPEN SETUP
       level0Setup()
       break
     case 1:
+      player.remove()
+      door.remove()
+      coneUp.remove()
+      coneDown.remove()
+      coneLeft.remove()
+      coneRight.remove()
       level1Setup()
       break
     case 2:
@@ -107,6 +113,17 @@ function setup() { //////////////////////////////// OPEN SETUP
     case 3:
       player.remove()
       door.remove()
+      coneDown.remove()
+      coneDown2.remove()
+      coneUp.remove()
+      coneUp2.remove()
+      coneLeft.remove()
+      coneRight.remove()
+      coneRight2.remove()
+      platformLeft.remove()
+      platformRight.remove()
+      death.remove()
+      deathPic.remove()
       level3Setup()
       break
     case 4:
