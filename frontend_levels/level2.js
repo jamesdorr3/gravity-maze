@@ -22,7 +22,7 @@ function level2Setup() {
   createCanvas(1000, 700);
 
   door = createSprite(
-    900, 400, 50, 85);
+    900, 300, 50, 85);
   door.addImage(doorImg, 0, 0)
   door.scale = .4
 
