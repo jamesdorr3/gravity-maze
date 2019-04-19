@@ -26,53 +26,67 @@ function level2Setup() {
   door.addImage(doorImg, 0, 0)
   door.scale = .4
 
-  // coneUp = createSprite(
-  //   275, 500, 10, 70);
-  // coneUp.addImage(coneUpImg, 0, 0)
+  coneDown = createSprite(
+    750, 250, 10, 70);
+  coneDown.addImage(coneDownImg, 0, 0)
 
-  // coneDown = createSprite(
-  //   950, 70, 1, 70);
-  // coneDown.addImage(coneDownImg, 0, 0)
+  coneDown2 = createSprite(
+   500, 200, 10, 70);
+  coneDown2.addImage(coneDownImg, 0, 0)
 
-  // coneUp2 = createSprite(
-  //   20, 250, 1, 70);
-  // coneUp2.addImage(coneUpImg, 0, 0)
+  coneUp = createSprite(
+    800, 200, 10, 70);
+  coneUp.addImage(coneUpImg, 0, 0)
 
-  // coneDown2 = createSprite(
-  //   250, 50, 1, 70);
-  // coneDown2.addImage(coneDownImg, 0, 0)
+  coneUp2 = createSprite(
+     200, 400, 1, 70);
+  coneUp2.addImage(coneUpImg, 0, 0)
 
-  // ceiling = createSprite(
-  //   500, -50, 1100, 100
-  // )
-  // floor = createSprite(
-  //   500, 750, 1100, 100
-  // )
-  // leftWall = createSprite(
-  //   -50, 350, 100, 1100
-  // )
-  // rightWall = createSprite(
-  //   1050, 350, 100, 1100
-  // )
+  coneLeft = createSprite(
+    920, 570, 1, 70);
+  coneLeft.addImage(coneLeftImg, 0, 0)
 
-  // platformLeft = createSprite(
-  //   150, 350, 300, 40
-  // );
+  coneRight = createSprite(
+    200, 200, 1, 70);
+  coneRight.addImage(coneRightImg, 0, 0)
 
-  // platformRight = createSprite(
-  //   850, 500, 300, 40
-  // );
+  coneRight2 = createSprite(
+    100, 600, 1, 70);
+  coneRight2.addImage(coneRightImg, 0, 0)
 
-  // death = createSprite(
-  //   500, 675, 1000, 75
-  // );
-  // death.visible = false
-  // // death.addImage(fire)
 
-  // deathPic = createSprite(
-  //   500, 675, 1000, 75
-  // );
-  // deathPic.addImage(fire)
+
+  ceiling = createSprite(
+    500, -50, 1100, 100
+  )
+  floor = createSprite(
+    500, 750, 1100, 100
+  )
+  leftWall = createSprite(
+    -50, 350, 100, 1100
+  )
+  rightWall = createSprite(
+    1050, 350, 100, 1100
+  )
+
+  platformLeft = createSprite(
+    150, 550, 300, 40
+  );
+
+  platformRight = createSprite(
+    950, 500, 300, 40
+  );
+
+  death = createSprite(
+    350, 775, 1000, 75
+  );
+  death.visible = false
+  death.addImage(fire)
+
+  deathPic = createSprite(
+    350, 675, 1000, 75
+  );
+  deathPic.addImage(fire)
 
 
   player = createSprite(  // PLAYER ALWAYS LAST SO SHE'S ABOVE OTHERS
@@ -172,25 +186,30 @@ function level2Draw() {
     player.originalWidth = 100;
   }
 
-////////////////////////////// THIS IS DIFFERENT IN EVERY LEVEL vv 
+////////////////////////////// THIS IS DIFFERENT IN EVERY LEVEL vv
 
-  // if (player.overlap(coneUp)) {
-  //   gravityDirection = 'up'
-  // }
+  if (player.overlap(coneUp) || player.overlap(coneUp2)) {
+    gravityDirection = 'up'
+  }
 
-  // if (player.overlap(coneDown) || player.overlap(coneDown2)) {
-  //   gravityDirection = 'down'
-  // }
+  if (player.overlap(coneDown)|| player.overlap(coneDown2)) {
+    gravityDirection = 'down'
+  }
+  if (player.overlap(coneLeft)) {
+    gravityDirection = 'left'
+  }
+  if (player.overlap(coneRight)|| player.overlap(coneRight2)) {
+    gravityDirection = 'right'
+  }
 
-  
-  // if (player.overlap(death)) {
-  //   player.position.x = 100;
-  //   player.position.y = 50;
-  //   gravityDirection = 'down'
-  //   gravitySpeedX = 0
-  //   gravitySpeedY = 0
-  //   die()
-  // }
+  if (player.overlap(death)) {
+    player.position.x = 100;
+    player.position.y = 50;
+    gravityDirection = 'down'
+    gravitySpeedX = 0
+    gravitySpeedY = 0
+    die()
+  }
   ////////////////////////// DIFFERENT IN EVERY LEVEL ^^
   if (player.overlap(door)) {
     level += 1
@@ -255,7 +274,7 @@ function level2Draw() {
   hardFloor(floor)
   hardLeft(leftWall)
   hardRight(rightWall)
-  // platform(platformLeft)
-  // platform(platformRight)
+  platform(platformLeft)
+  platform(platformRight)
 
 } //////////////////////////////////////////////// CLOSE L1
