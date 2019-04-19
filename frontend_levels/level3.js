@@ -1,16 +1,3 @@
-function level3Preload() {
-  rest = loadImage(fetchURL + 'Fruits_Papaya_2D_Game_Asset/actions/rest/0001.png');
-  restL = loadImage(fetchURL + 'Fruits_Papaya_2D_Game_Asset/actions/rest/0001l.png');
-
-  fire = loadImage(fetchURL + 'fire.png');
-
-  doorImg = loadImage('http://localhost:3000/moondoor.png')
-  coneUpImg = loadImage(fetchURL + 'coneUp.png')
-  coneDownImg = loadImage(fetchURL + 'coneDown.png')
-  coneLeftImg = loadImage(fetchURL + 'coneLeft.png')
-  coneRightImg = loadImage(fetchURL + 'coneRight.png')
-}
-
 function level3Setup() {
 
   door = createSprite(
@@ -76,7 +63,7 @@ function level3Setup() {
   coneRight.addImage(coneRightImg)
 
   coneRight2 = createSprite(
-    25, 150, 0, 0
+    25, 125, 0, 0
   )
   coneRight2.addImage(coneRightImg)
 
@@ -125,7 +112,7 @@ function level3Draw() {
   ////////////////////////////////////// BARRIER PHYSICS
 
   hardRight(platform1)
-  hardFloor(platform1)
+  hardLeft(platform1)
   platform(platform2)
   platform(platform3)
   platform(platform4)
