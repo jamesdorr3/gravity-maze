@@ -315,7 +315,7 @@ function makeLeaderboard() {
     new Player(player.player_id, player.player_name, player.hi_score)
   }))
   .then(r =>  Player.all.sort((a, b) => b.score - a.score).forEach (player => {
-    document.querySelector('ul.leaderboard').innerHTML += `<li>${player.name} - ${player.score}</li>`}))
+    document.querySelector('ul.leaderboard').innerHTML += `<li>${player.score} - ${player.name}</li>`}))
 }
 
 

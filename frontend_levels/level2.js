@@ -40,7 +40,7 @@ function level2Setup() {
   );
 
   platformRight = createSprite(
-    950, 500, 300, 40
+    950, 425, 300, 40
   );
 
   death = createSprite(
